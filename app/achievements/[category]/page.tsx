@@ -152,7 +152,7 @@ export default function AchievementGallery() {
                     className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-blue-600/10 border border-blue-500/20 text-blue-400 text-sm font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300"
                   >
                     <ExternalLink size={14} />
-                    {file.type === "image" ? "View Image" : "Open PDF"}
+                    {file.type === "image" ? "View Certificate" : "Open PDF"}
                   </button>
                 </div>
               </motion.div>
