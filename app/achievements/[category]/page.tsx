@@ -48,7 +48,7 @@ export default function AchievementGallery() {
               .getPublicUrl(`${category}/${file.name}`);
             
             return {
-              id: file.id,
+              id: file.id || file.name,
               name: file.name,
               url: urlData.publicUrl,
               type: isPdf ? ("pdf" as const) : ("image" as const),
