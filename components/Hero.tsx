@@ -118,9 +118,9 @@ document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
           <span className="text-gray-500 text-sm">Follow Me</span>
           {[
             { icon: MapPin, href: "#", label: "Location" },
-            { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-            { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-            { icon: Github, href: "https://github.com", label: "GitHub" },
+            { icon: Linkedin, href: "https://www.linkedin.com/in/amarnath-b-88b907252/", label: "LinkedIn" },
+            { icon: Instagram, href: "https://www.instagram.com/its_me_amar2007?utm_source=qr&igsh=MWt2NzJnMDMwejh6OA==", label: "Instagram" },
+            { icon: Github, href: "https://github.com/Amarnath2007", label: "GitHub" },
           ].map(({ icon: Icon, href, label }) => (
             <motion.a
               key={label}
