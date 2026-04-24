@@ -105,7 +105,9 @@ export default function Navbar() {
                   className="absolute right-0 top-12 bg-[#081428] border border-blue-900/40 rounded-xl p-3 min-w-[200px] shadow-xl"
                 >
                   <a
-                    href="mailto:amarmicrosoft2021@gmail.com"
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=amarmicrosoft2021@gmail.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-900/20 text-gray-300 hover:text-white transition-all text-sm"
                   >
                     <Mail size={14} className="text-blue-400" />
@@ -173,7 +175,9 @@ export default function Navbar() {
                 </button>
               ))}
               <a
-                href="mailto:amarmicrosoft2021@gmail.com"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=amarmicrosoft2021@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block w-full text-left px-4 py-3 text-blue-400 hover:bg-blue-900/20 rounded-lg transition-all text-sm"
               >
                 Contact Me
