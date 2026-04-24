@@ -13,7 +13,7 @@ const stats = [
 
 const details = [
   { label: "Name:", value: "Amarnath B" },
-  { label: "Location:", value: "Chennai, Tamil Nadu" },
+  { label: "Location:", value: "Coimbatore, Tamil Nadu" },
   { label: "Email:", value: "amarmicrosoft2021@gmail.com" },
   { label: "College:", value: "PSG CAS" },
   { label: "Availability:", value: "Open to Opportunities", highlight: true },
@@ -76,12 +76,28 @@ export default function About() {
 
             {/* Bio */}
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              I&apos;m a BCA student at PSG CAS, Chennai — an enthusiastic coder
+              I&apos;m a BCA student at PSG CAS, Coimbatore — an enthusiastic coder
               passionate about competitive programming, hackathons, and tech
               innovation. With 15+ competition wins and a strong interest in AI
               tools, I combine creative thinking with technical execution to build
               meaningful, impactful solutions.
             </p>
+
+            {/* Currently Learning */}
+            <div className="mb-6">
+              <h4 className="text-white font-semibold text-sm mb-3">Currently Learning 🚀</h4>
+              <div className="flex flex-wrap gap-2">
+                {["Next.js", "TypeScript", "Advanced System Design"].map((skill) => (
+                  <motion.span
+                    key={skill}
+                    whileHover={{ scale: 1.05, borderColor: "rgba(52,211,153,0.6)" }}
+                    className="px-3 py-1 rounded-lg bg-emerald-900/30 border border-emerald-800/40 text-emerald-300 text-xs font-medium cursor-default transition-all"
+                  >
+                    {skill}
+                  </motion.span>
+                ))}
+              </div>
+            </div>
 
             {/* Tags */}
             <div className="flex flex-wrap gap-2">

@@ -81,7 +81,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="text-center">
           <p className="text-gray-600 text-sm">
-            © 2024 Amarnath B. All Rights Reserved.
+            © 2026 Amarnath B. All Rights Reserved.
           </p>
         </div>
       </div>

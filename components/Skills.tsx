@@ -1,67 +1,40 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 import SectionDivider from "./SectionDivider";
 
-const skills = [
-  { name: "C", level: 90, icon: "C", color: "#60a5fa", bg: "#1e3a5f" },
-  { name: "C++", level: 85, icon: "C++", color: "#818cf8", bg: "#2d1f5e" },
-  { name: "Python", level: 85, icon: "🐍", color: "#34d399", bg: "#064e3b" },
-  { name: "Java", level: 88, icon: "☕", color: "#fb923c", bg: "#431407" },
-  { name: "Problem Solving", level: 92, icon: "🧠", color: "#f472b6", bg: "#500724" },
-  { name: "AI Tools", level: 88, icon: "🤖", color: "#a78bfa", bg: "#2e1065" },
-  { name: "Debugging", level: 87, icon: "🔍", color: "#38bdf8", bg: "#082f49" },
-  { name: "UI/UX", level: 75, icon: "🎨", color: "#fb7185", bg: "#4c0519" },
+const skillCategories = [
+  {
+    title: "Programming",
+    icon: "💻",
+    skills: ["C", "C++", "Python", "Java"],
+    color: "#60a5fa",
+    bg: "#1e3a5f"
+  },
+  {
+    title: "Frontend",
+    icon: "🎨",
+    skills: ["HTML", "CSS", "JavaScript", "React", "Next.js", "Tailwind CSS"],
+    color: "#f472b6",
+    bg: "#500724"
+  },
+  {
+    title: "Backend & Database",
+    icon: "🗄️",
+    skills: ["Node.js", "SQL", "Supabase", "File Handling"],
+    color: "#34d399",
+    bg: "#064e3b"
+  },
+  {
+    title: "Core Competencies",
+    icon: "🧠",
+    skills: ["Problem Solving", "Data Structures", "Algorithms", "AI Tools", "Debugging"],
+    color: "#fb923c",
+    bg: "#431407"
+  }
 ];
 
-function SkillCard({ skill, delay }: { skill: typeof skills[0]; delay: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay }}
-      className="glass-card rounded-2xl p-6 min-w-[160px] flex-shrink-0 cursor-default"
-    >
-      {/* Icon */}
-      <div
-        className="w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-4"
-        style={{ backgroundColor: skill.bg }}
-      >
-        <span style={{ color: skill.color }}>{skill.icon}</span>
-      </div>
-
-      {/* Name */}
-      <p className="text-white font-semibold text-sm mb-3">{skill.name}</p>
-
-      {/* Progress Bar */}
-      <div className="w-full h-1.5 bg-blue-950 rounded-full overflow-hidden">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={inView ? { width: `${skill.level}%` } : {}}
-          transition={{ duration: 1.2, delay: delay + 0.3, ease: "easeOut" }}
-          className="h-full rounded-full"
-          style={{ backgroundColor: skill.color }}
-        />
-      </div>
-    </motion.div>
-  );
-}
-
 export default function Skills() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const scroll = (dir: "left" | "right") => {
-    if (containerRef.current) {
-      containerRef.current.scrollBy({ left: dir === "right" ? 200 : -200, behavior: "smooth" });
-    }
-  };
-
   return (
     <section id="skills" className="relative z-10 py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,31 +52,48 @@ export default function Skills() {
           <h2 className="text-4xl sm:text-5xl font-bold text-white">Skills</h2>
         </motion.div>
 
-        {/* Scrollable cards */}
-        <div className="relative">
-          <button
-            onClick={() => scroll("left")}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-[#081428] border border-blue-900/40 text-gray-400 hover:text-blue-400 hover:border-blue-400 transition-all"
-          >
-            <ChevronLeft size={18} />
-          </button>
+        {/* Categories Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          {skillCategories.map((category, idx) => (
+            <motion.div
+              key={category.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              viewport={{ once: true }}
+              className="glass-card rounded-2xl p-6 flex flex-col items-center justify-center text-center cursor-default hover:-translate-y-2 transition-transform duration-300 h-full"
+            >
+              {/* Category Icon */}
+              <div
+                className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl mb-5 shadow-lg"
+                style={{ backgroundColor: category.bg }}
+              >
+                <span style={{ color: category.color }}>{category.icon}</span>
+              </div>
 
-          <div
-            ref={containerRef}
-            className="flex gap-4 overflow-x-auto scrollbar-hide pb-4"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            {skills.map((skill, i) => (
-              <SkillCard key={skill.name} skill={skill} delay={i * 0.08} />
-            ))}
-          </div>
+              {/* Category Title */}
+              <h3 className="text-white font-bold text-lg mb-4 w-full pb-3 border-b border-white/10 shrink-0">
+                {category.title}
+              </h3>
 
-          <button
-            onClick={() => scroll("right")}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-[#081428] border border-blue-900/40 text-gray-400 hover:text-blue-400 hover:border-blue-400 transition-all"
-          >
-            <ChevronRight size={18} />
-          </button>
+              {/* Skills Tags */}
+              <div className="flex flex-wrap justify-center gap-2.5 w-full">
+                {category.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors"
+                    style={{ 
+                      backgroundColor: `${category.color}15`, 
+                      color: category.color,
+                      border: `1px solid ${category.color}30`
+                    }}
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
       <SectionDivider />

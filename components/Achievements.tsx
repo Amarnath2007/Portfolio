@@ -14,11 +14,22 @@ const achievements = [
     iconColor: "#60a5fa",
     iconBg: "#0c1a40",
     title: "Inter-College Wins",
-    highlight: "5+ Wins",
+    highlight: "🏆 5+ Wins",
     subtitle: "Various Institutions",
     category: "intercollege",
     description:
       "Successfully competed and secured top positions in symposiums and technical fests held at various reputed colleges.",
+  },
+  {
+    icon: Award,
+    iconColor: "#f59e0b",
+    iconBg: "#1c1200",
+    title: "College Wins",
+    highlight: "🏆 5+ Wins",
+    subtitle: "PSG CAS (Internal)",
+    category: "events",
+    description:
+      "Consistent performance in intra-college events, spanning debugging, logic-building, and technical paper presentations.",
   },
   {
     icon: Zap,
@@ -29,17 +40,6 @@ const achievements = [
     category: "hackathon",
     description:
       "Building functional prototypes and solving real-world problems under pressure. Secured multiple podium finishes.",
-  },
-  {
-    icon: Award,
-    iconColor: "#f59e0b",
-    iconBg: "#1c1200",
-    title: "College Wins",
-    highlight: "5+ Wins",
-    subtitle: "PSG CAS (Internal)",
-    category: "events",
-    description:
-      "Consistent performance in intra-college events, spanning debugging, logic-building, and technical paper presentations.",
   },
 ];
 

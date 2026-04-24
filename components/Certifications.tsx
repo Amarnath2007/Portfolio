@@ -90,7 +90,7 @@ export default function Certifications() {
 
         {/* Horizontally Scrollable Carousel */}
         <div className="relative">
-          <div className="flex gap-6 overflow-x-auto scroll-smooth pb-4 px-1 [&::-webkit-scrollbar]:hidden ms-auto" style={{ scrollbarWidth: 'none' }}>
+          <div className="flex gap-6 overflow-x-auto scroll-smooth pb-8 px-1 items-stretch [&::-webkit-scrollbar]:hidden ms-auto" style={{ scrollbarWidth: 'none' }}>
             {certs.map((cert, i) => (
               <motion.div
                 key={cert.title}
@@ -98,7 +98,7 @@ export default function Certifications() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.15 }}
                 viewport={{ once: true }}
-                className="glass-card rounded-2xl p-7 group flex-shrink-0 w-full sm:w-96 scroll-snap-align-start"
+                className="glass-card rounded-2xl p-7 group flex-shrink-0 w-full sm:w-96 scroll-snap-align-start flex flex-col"
               >
                 {/* Badge Icon */}
                 <div
@@ -118,15 +118,17 @@ export default function Certifications() {
                 <p className="text-gray-400 text-sm leading-relaxed mb-5">{cert.description}</p>
 
                 {/* Link */}
-                <a 
-                  href={(cert as any).file_url || "#"} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-xs text-gray-500 group-hover:text-blue-400 transition-colors cursor-pointer"
-                >
-                  <ExternalLink size={12} />
-                  <span>View Certificate</span>
-                </a>
+                <div className="mt-auto pt-5 border-t border-gray-800/50">
+                  <a 
+                    href={(cert as any).file_url || "#"} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-xs text-gray-500 group-hover:text-blue-400 transition-colors cursor-pointer"
+                  >
+                    <ExternalLink size={12} />
+                    <span>View Certificate</span>
+                  </a>
+                </div>
               </motion.div>
             ))}
           </div>
