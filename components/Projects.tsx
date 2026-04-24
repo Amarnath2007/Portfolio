@@ -143,7 +143,7 @@ export default function Projects() {
                           rel="noopener noreferrer"
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}
-                          className="text-gray-500 hover:text-blue-400 transition-colors flex items-center gap-1.5"
+                          className="text-gray-500 hover:text-blue-400 transition-colors flex items-center"
                           title="Source Code"
                         >
                           <Github size={18} />
@@ -156,11 +156,10 @@ export default function Projects() {
                           rel="noopener noreferrer"
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}
-                          className="text-gray-500 hover:text-blue-400 transition-colors flex items-center gap-1.5"
+                          className="text-gray-500 hover:text-blue-400 transition-colors flex items-center"
                           title="Live Demo"
                         >
                           <ExternalLink size={18} />
-                          <span className="text-[10px] font-bold uppercase tracking-wider">Demo</span>
                         </motion.a>
                       )}
                     </div>
