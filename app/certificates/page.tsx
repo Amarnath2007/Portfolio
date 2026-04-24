@@ -86,7 +86,7 @@ export default function CertificatesPage() {
 
           if (storageData && storageData.length > 0) {
             const formattedCerts = storageData.map((file) => ({
-              id: file.id,
+              id: file.id || file.name,
               title: file.name.replace(".pdf", ""),
               issuer: "External Certification",
               file_url: supabase.storage.from("certifications").getPublicUrl(file.name).data.publicUrl,
