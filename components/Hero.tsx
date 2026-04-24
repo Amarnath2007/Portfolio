@@ -110,9 +110,9 @@ export default function Hero() {
                 href="https://mail.google.com/mail/?view=cm&fs=1&to=amarmicrosoft2021@gmail.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(52, 211, 153, 0.3)" }}
+                whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(79, 70, 229, 0.6)" }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-2 px-5 py-3 border border-emerald-500/40 rounded-xl text-sm font-semibold text-emerald-400 hover:text-white hover:border-emerald-400 hover:bg-emerald-900/20 transition-all duration-200"
+                className="flex items-center gap-2 px-5 py-3 border border-transparent bg-indigo-600 hover:bg-indigo-500 rounded-xl text-sm font-semibold text-white shadow-[0_0_12px_rgba(79,70,229,0.4)] transition-all duration-200"
               >
                 <Mail size={18} />
                 Contact Me
@@ -178,8 +178,8 @@ export default function Hero() {
                 left: "50%",
                 transform: "translate(-50%, -50%)",
                 background:
-                  "radial-gradient(circle, rgba(59,130,246,0.25) 0%, rgba(29,78,216,0.15) 50%, transparent 75%)",
-                filter: "blur(25px)",
+                  "radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(29,78,216,0.1) 50%, transparent 75%)",
+                filter: "blur(20px)",
               }}
             />
 
@@ -194,7 +194,7 @@ export default function Hero() {
                 className="object-cover object-center"
                 style={{
                   filter:
-                    "drop-shadow(0 0 30px rgba(59,130,246,0.7)) drop-shadow(0 0 80px rgba(29,78,216,0.5))",
+                    "drop-shadow(0 0 20px rgba(59,130,246,0.4)) drop-shadow(0 0 50px rgba(29,78,216,0.3))",
                 }}
                 priority
               />
