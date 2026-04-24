@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, Mail, Github, Linkedin } from "lucide-react";
+import { Menu, X, ChevronDown, Mail, Github, Linkedin, Instagram } from "lucide-react";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -112,7 +112,7 @@ export default function Navbar() {
                     Email Me
                   </a>
                   <a
-                    href="https://github.com"
+                    href="https://github.com/Amarnath2007"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-900/20 text-gray-300 hover:text-white transition-all text-sm"
@@ -121,13 +121,22 @@ export default function Navbar() {
                     GitHub
                   </a>
                   <a
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/amarnath-b-88b907252/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-900/20 text-gray-300 hover:text-white transition-all text-sm"
                   >
                     <Linkedin size={14} className="text-blue-400" />
                     LinkedIn
+                  </a>
+                  <a
+                    href="https://www.instagram.com/its_me_amar2007?utm_source=qr&igsh=MWt2NzJnMDMwejh6OA=="
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-900/20 text-gray-300 hover:text-white transition-all text-sm"
+                  >
+                    <Instagram size={14} className="text-blue-400" />
+                    Instagram
                   </a>
                 </motion.div>
               )}
