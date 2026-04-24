@@ -49,7 +49,8 @@ const projects = [
     description:
       "A modern, high-performance portfolio website built with Next.js and Tailwind CSS, featuring smooth animations, dark mode, and a responsive design to showcase my professional journey.",
     tags: ["Next.js", "React", "Tailwind CSS"],
-    github: "https://github.com/Amarnath2007/P-2-Portfolio-front-end",
+    github: "https://github.com/Amarnath2007/Portfolio",
+    demo: "https://amar-portfolio-26.vercel.app",
   },
   {
     letter: "B",
