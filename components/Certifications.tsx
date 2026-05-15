@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { BadgeCheck, ExternalLink } from "lucide-react";
+import { BadgeCheck, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import SectionDivider from "./SectionDivider";
 import { supabase } from "@/lib/supabase";
 
@@ -71,6 +71,16 @@ export default function Certifications() {
     }
     fetchCerts();
   }, []);
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const { scrollLeft, clientWidth } = scrollRef.current;
+      const scrollTo = direction === "left" ? scrollLeft - clientWidth / 1.5 : scrollLeft + clientWidth / 1.5;
+      scrollRef.current.scrollTo({ left: scrollTo, behavior: "smooth" });
+    }
+  };
   return (
     <section id="certifications" className="relative z-10 py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -89,8 +99,12 @@ export default function Certifications() {
         </motion.div>
 
         {/* Horizontally Scrollable Carousel */}
-        <div className="relative">
-          <div className="flex gap-6 overflow-x-auto scroll-smooth pb-8 px-1 items-stretch [&::-webkit-scrollbar]:hidden ms-auto" style={{ scrollbarWidth: 'none' }}>
+        <div className="relative group/carousel">
+          <div 
+            ref={scrollRef}
+            className="flex gap-6 overflow-x-auto scroll-smooth pb-8 px-1 items-stretch [&::-webkit-scrollbar]:hidden ms-auto" 
+            style={{ scrollbarWidth: 'none' }}
+          >
             {certs.map((cert, i) => (
               <motion.div
                 key={cert.title}
@@ -132,6 +146,23 @@ export default function Certifications() {
               </motion.div>
             ))}
           </div>
+
+          {/* Navigation Arrows */}
+          <button
+            onClick={() => scroll("left")}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 w-14 h-14 rounded-full bg-slate-900/60 border border-white/10 text-white flex items-center justify-center backdrop-blur-md opacity-0 group-hover/carousel:opacity-100 group-hover/carousel:translate-x-0 transition-all duration-500 z-30 hover:bg-blue-500 hover:text-white hover:border-blue-400 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hidden sm:flex"
+            aria-label="Previous"
+          >
+            <ChevronLeft size={28} />
+          </button>
+          
+          <button
+            onClick={() => scroll("right")}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 w-14 h-14 rounded-full bg-slate-900/60 border border-white/10 text-white flex items-center justify-center backdrop-blur-md opacity-0 group-hover/carousel:opacity-100 group-hover/carousel:translate-x-0 transition-all duration-500 z-30 hover:bg-blue-500 hover:text-white hover:border-blue-400 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] flex"
+            aria-label="Next"
+          >
+            <ChevronRight size={28} />
+          </button>
         </div>
       </div>
       <SectionDivider />
