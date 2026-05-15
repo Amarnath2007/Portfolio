@@ -2,10 +2,24 @@
 
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { Github, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
+import { Github, ExternalLink, ChevronLeft, ChevronRight, Download } from "lucide-react";
 import SectionDivider from "./SectionDivider";
 
 const projects = [
+  {
+    letter: "T",
+    color: "#a78bfa",
+    bg: "from-purple-900/40 to-purple-950/60",
+    title: "Tunic Music",
+    subtitle: "Mobile App · 2026",
+    description:
+      "A premium music streaming application featuring a library of 500+ songs with a Spotify-inspired user experience.",
+    highlights: ["Built with Flutter and Kotlin", "Integrated with Cloudinary for seamless media hosting", "Advanced playback controls and playlist management"],
+    tags: ["Flutter", "Kotlin", "Cloudinary"],
+    download: "#", // Replace with actual APK link
+    contactSource: true,
+    topProject: true,
+  },
   {
     letter: "F",
     color: "#60a5fa",
@@ -173,7 +187,7 @@ export default function Projects() {
                       </span>
                     ))}
                   </div>
-                  <div className="flex gap-4">
+                  <div className="flex gap-4 items-center">
                     {p.github && (
                       <motion.a
                         href={p.github}
@@ -185,6 +199,27 @@ export default function Projects() {
                         title="Source Code"
                       >
                         <Github size={18} />
+                      </motion.a>
+                    )}
+                    {p.contactSource && (
+                      <div 
+                        className="text-gray-500 hover:text-purple-400 transition-colors flex items-center shrink-0 cursor-help"
+                        title="Contact owner for source code"
+                      >
+                        <Github size={18} className="opacity-50" />
+                      </div>
+                    )}
+                    {p.download && (
+                      <motion.a
+                        href={p.download}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        className="text-gray-500 hover:text-green-400 transition-colors flex items-center shrink-0"
+                        title="Download APK"
+                      >
+                        <Download size={18} />
                       </motion.a>
                     )}
                     {p.demo && (
