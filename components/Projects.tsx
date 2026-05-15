@@ -30,7 +30,7 @@ const projects = [
       "A fun interactive logic-based game built to demonstrate creative problem solving and algorithm design.",
     highlights: ["Interactive terminal-style interface", "Calculates relationship outcomes with FLAMES formula"],
     tags: ["HTML", "CSS", "JavaScript"],
-    github: "https://github.com/Amarnath2007/Flames_game.git",
+    contactSource: true,
     demo: "https://flames-lilac.vercel.app",
     topProject: true,
   },
