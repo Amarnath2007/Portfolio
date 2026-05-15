@@ -16,7 +16,7 @@ const projects = [
       "A premium music streaming application featuring a library of 500+ songs with a Spotify-inspired user experience.",
     highlights: ["Built with Flutter and Kotlin", "Integrated with Cloudinary for seamless media hosting", "Advanced playback controls and playlist management"],
     tags: ["Flutter", "Kotlin", "Cloudinary"],
-    download: "#", // Replace with actual APK link
+    download: "https://ydfjuomyveiwbxejkjvh.supabase.co/storage/v1/object/sign/Apps/Tunic_music_by_Amar.apk?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV81N2RmMTE0ZC1iNTk5LTRhN2ItYjk1ZS02ZDJhYjA0NWZiMTIiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJBcHBzL1R1bmljX211c2ljX2J5X0FtYXIuYXBrIiwiaWF0IjoxNzc4ODIwNzczLCJleHAiOjE5MzY1MDA3NzN9.BQpxvEi3oVdrAoFjPy-NuKtezOKsABWQRDD8Uzns0ho", 
     contactSource: true,
     topProject: true,
   },
