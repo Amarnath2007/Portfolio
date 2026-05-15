@@ -202,12 +202,13 @@ export default function Projects() {
                       </motion.a>
                     )}
                     {p.contactSource && (
-                      <div 
-                        className="text-gray-500 hover:text-purple-400 transition-colors flex items-center shrink-0 cursor-help"
+                      <button 
+                        onClick={() => alert("Please contact the owner directly for the source code of this project.")}
+                        className="text-gray-500 hover:text-purple-400 transition-colors flex items-center shrink-0"
                         title="Contact owner for source code"
                       >
                         <Github size={18} className="opacity-50" />
-                      </div>
+                      </button>
                     )}
                     {p.download && (
                       <motion.a
