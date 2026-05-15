@@ -59,7 +59,7 @@ const projects = [
     highlights: ["Balance management and transaction history", "File-based data persistence"],
     tags: ["C", "File Handling", "Algorithms"],
     github: "https://github.com/Amarnath2007/Bank_System-using-C.git",
-    topProject: true,
+    topProject: false,
   },
   {
     letter: "B",
