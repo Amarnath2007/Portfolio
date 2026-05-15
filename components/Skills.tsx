@@ -26,6 +26,13 @@ const skillCategories = [
     bg: "#064e3b"
   },
   {
+    title: "Application Development",
+    icon: "📱",
+    skills: ["Flutter", "Kotlin", "Java"],
+    color: "#818cf8",
+    bg: "#1e1b4b"
+  },
+  {
     title: "Core Competencies",
     icon: "🧠",
     skills: ["Problem Solving", "Data Structures", "Algorithms", "AI Tools", "Debugging"],
@@ -53,7 +60,7 @@ export default function Skills() {
         </motion.div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-6 max-w-7xl mx-auto">
           {skillCategories.map((category, idx) => (
             <motion.div
               key={category.title}
@@ -61,7 +68,7 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               viewport={{ once: true }}
-              className="glass-card rounded-2xl p-6 flex flex-col items-center justify-center text-center cursor-default hover:-translate-y-2 transition-transform duration-300 h-full"
+              className="glass-card rounded-2xl p-6 flex flex-col items-center justify-center text-center cursor-default hover:-translate-y-2 transition-transform duration-300 w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.33%-1.5rem)] xl:w-[calc(20%-1.5rem)] min-h-[280px]"
             >
               {/* Category Icon */}
               <div
