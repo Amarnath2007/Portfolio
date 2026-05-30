@@ -80,7 +80,7 @@ export default function About() {
               passionate about competitive programming, hackathons, and tech
               innovation. With 15+ competition wins and a strong interest in AI
               tools, I combine creative thinking with technical execution to build
-              meaningful, impactful solutions.
+              impactful solutions.
             </p>
 
             {/* Currently Learning */}
