@@ -12,7 +12,7 @@ export default function Hero() {
   useEffect(() => {
     if (supabase && supabase.storage) {
       try {
-        const { data } = supabase.storage.from("resume").getPublicUrl("Resume.pdf");
+        const { data } = supabase.storage.from("resume").getPublicUrl("Amar_Resume.pdf");
         if (data?.publicUrl) {
           setResumeUrl(data.publicUrl);
         }
@@ -74,7 +74,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-xl"
             >
-              I specialize in building scalable web applications, robust real-time systems, and intuitive user experiences. Passionate about writing clean code and solving complex problems with modern technologies.
+              I build web applications, real-time systems, and digital solutions using modern AI-powered development tools. Possessing strong leadership, teamwork, and problem-solving skills, I am passionate about technology and creating intuitive user experiences while continuously expanding my software development expertise.
             </motion.p>
 
             <motion.div
@@ -128,7 +128,7 @@ export default function Hero() {
               <span className="text-gray-500 text-sm">Follow Me</span>
               {[
                 { icon: MapPin, href: "#", label: "Location" },
-                { icon: Linkedin, href: "https://www.linkedin.com/in/amarnath-b-88b907252/", label: "LinkedIn" },
+                { icon: Linkedin, href: "https://www.linkedin.com/in/amarnath-b-b7b79b39a/", label: "LinkedIn" },
                 { icon: Instagram, href: "https://www.instagram.com/its_me_amar2007?utm_source=qr&igsh=MWt2NzJnMDMwejh6OA==", label: "Instagram" },
                 { icon: Github, href: "https://github.com/Amarnath2007", label: "GitHub" },
               ].map(({ icon: Icon, href, label }) => (

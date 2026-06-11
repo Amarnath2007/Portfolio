@@ -6,7 +6,7 @@ import SectionDivider from "./SectionDivider";
 
 const stats = [
   { value: "5+", label: "Projects Done" },
-  { value: "3+", label: "Years in Tech" },
+  { value: "5+", label: "Years in Tech" },
   { value: "10+", label: "Events Won" },
   { value: "3+", label: "Certifications" },
 ];

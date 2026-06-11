@@ -37,7 +37,7 @@ export default function Footer() {
             {[
               { icon: Mail, href: "https://mail.google.com/mail/?view=cm&fs=1&to=amarmicrosoft2021@gmail.com" },
               { icon: Github, href: "https://github.com/Amarnath2007" },
-              { icon: Linkedin, href: "https://www.linkedin.com/in/amarnath-b-88b907252/" },
+              { icon: Linkedin, href: "https://www.linkedin.com/in/amarnath-b-b7b79b39a/" },
               { icon: Instagram, href: "https://www.instagram.com/its_me_amar2007?utm_source=qr&igsh=MWt2NzJnMDMwejh6OA==" },
             ].map(({ icon: Icon, href }) => (
               <motion.a

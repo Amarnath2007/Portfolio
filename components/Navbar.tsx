@@ -123,7 +123,7 @@ export default function Navbar() {
                     GitHub
                   </a>
                   <a
-                    href="https://www.linkedin.com/in/amarnath-b-88b907252/"
+                    href="https://www.linkedin.com/in/amarnath-b-b7b79b39a/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-900/20 text-gray-300 hover:text-white transition-all text-sm"
