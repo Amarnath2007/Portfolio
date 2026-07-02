@@ -152,13 +152,14 @@ export default function Hero() {
             initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.3 }}
-            className="relative flex justify-center items-center h-[600px]"
+            className="relative flex justify-center items-center h-[500px] sm:h-[650px] lg:h-[800px]" // Increased container height to fit larger image
           >
+            {/* Proportional increase of the outer circular glow (420 -> 550) */}
             <div
               className="absolute"
               style={{
-                width: 420,
-                height: 420,
+                width: "min(550px, 85vw)",
+                height: "min(550px, 85vw)",
                 borderRadius: "50%",
                 top: "50%",
                 left: "50%",
@@ -168,11 +169,12 @@ export default function Hero() {
               }}
             />
 
+            {/* Proportional increase of the inner gradient (300 -> 390) */}
             <div
               className="absolute"
               style={{
-                width: 300,
-                height: 300,
+                width: "min(390px, 60vw)",
+                height: "min(390px, 60vw)",
                 borderRadius: "50%",
                 top: "50%",
                 left: "50%",
@@ -183,9 +185,13 @@ export default function Hero() {
               }}
             />
 
+            {/* Increased image container size (420x540 -> 550x710) while maintaining aspect ratio and centering */}
             <div
               className="relative z-10"
-              style={{ width: 420, height: 540 }}
+              style={{ 
+                width: "min(550px, 85vw)", 
+                height: "min(710px, 110vw)" 
+              }}
             >
               <Image
                 src="/photo.png"
