@@ -1,6 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import SectionDivider from "./SectionDivider";
 
 const skillCategories = [
@@ -42,6 +44,36 @@ const skillCategories = [
 ];
 
 export default function Skills() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [showLeft, setShowLeft] = useState(false);
+  const [showRight, setShowRight] = useState(true);
+
+  // Handle scroll arrows visibility
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setShowLeft(scrollLeft > 20);
+      setShowRight(scrollLeft < scrollWidth - clientWidth - 20);
+    }
+  };
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (el) {
+      el.addEventListener("scroll", handleScroll);
+      handleScroll(); // Initial check
+    }
+    return () => el?.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scroll = (dir: "left" | "right") => {
+    if (scrollRef.current) {
+      const { clientWidth } = scrollRef.current;
+      const scrollAmount = dir === "left" ? -clientWidth / 1.5 : clientWidth / 1.5;
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
+
   return (
     <section id="skills" className="relative z-10 py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -60,8 +92,39 @@ export default function Skills() {
         </motion.div>
 
         {/* Categories Carousel */}
-        <div className="relative group/carousel">
+        <div className="relative group/carousel px-1">
+          {/* Left Arrow */}
+          <AnimatePresence>
+            {showLeft && (
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                onClick={() => scroll("left")}
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-6 z-40 w-12 h-12 md:w-14 md:h-14 rounded-full bg-blue-900/40 border border-blue-400/30 text-blue-400 flex items-center justify-center backdrop-blur-md shadow-lg shadow-blue-500/20 hover:bg-blue-600 hover:text-white transition-all duration-300"
+              >
+                <ChevronLeft size={28} />
+              </motion.button>
+            )}
+          </AnimatePresence>
+
+          {/* Right Arrow */}
+          <AnimatePresence>
+            {showRight && (
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                onClick={() => scroll("right")}
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-6 z-40 w-12 h-12 md:w-14 md:h-14 rounded-full bg-blue-900/40 border border-blue-400/30 text-blue-400 flex items-center justify-center backdrop-blur-md shadow-lg shadow-blue-500/20 hover:bg-blue-600 hover:text-white transition-all duration-300"
+              >
+                <ChevronRight size={28} />
+              </motion.button>
+            )}
+          </AnimatePresence>
+
           <div 
+            ref={scrollRef}
             className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-6 pb-10 px-4 md:px-0 scroll-smooth [&::-webkit-scrollbar]:hidden" 
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
