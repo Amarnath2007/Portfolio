@@ -59,48 +59,53 @@ export default function Skills() {
           <h2 className="text-4xl sm:text-5xl font-bold text-white">Skills</h2>
         </motion.div>
 
-        {/* Categories Grid */}
-        <div className="flex flex-col md:flex-row md:flex-wrap justify-center gap-6 md:gap-8 max-w-7xl mx-auto">
-          {skillCategories.map((category, idx) => (
-            <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              viewport={{ once: true }}
-              className="glass-card rounded-2xl md:rounded-3xl p-8 sm:p-10 flex flex-col items-center justify-center text-center cursor-default hover:-translate-y-2 transition-transform duration-300 w-[95%] mx-auto md:mx-0 md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)] xl:w-[calc(20%-1.5rem)] min-h-[300px] border border-white/5"
-            >
-              {/* Category Icon */}
-              <div
-                className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-xl"
-                style={{ backgroundColor: category.bg }}
+        {/* Categories Carousel */}
+        <div className="relative group/carousel">
+          <div 
+            className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-6 pb-10 px-4 md:px-0 scroll-smooth [&::-webkit-scrollbar]:hidden" 
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {skillCategories.map((category, idx) => (
+              <motion.div
+                key={category.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                viewport={{ once: true }}
+                className="glass-card rounded-2xl md:rounded-3xl p-8 sm:p-10 flex flex-col items-center justify-center text-center cursor-default hover:-translate-y-2 transition-transform duration-300 w-[85%] sm:w-[350px] md:w-[400px] flex-shrink-0 snap-center border border-white/5 min-h-[350px]"
               >
-                <span style={{ color: category.color }}>{category.icon}</span>
-              </div>
+                {/* Category Icon */}
+                <div
+                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-xl"
+                  style={{ backgroundColor: category.bg }}
+                >
+                  <span style={{ color: category.color }}>{category.icon}</span>
+                </div>
 
-              {/* Category Title */}
-              <h3 className="text-white font-bold text-xl mb-5 w-full pb-3 border-b border-white/10 shrink-0">
-                {category.title}
-              </h3>
+                {/* Category Title */}
+                <h3 className="text-white font-bold text-xl md:text-2xl mb-5 w-full pb-3 border-b border-white/10 shrink-0">
+                  {category.title}
+                </h3>
 
-              {/* Skills Tags */}
-              <div className="flex flex-wrap justify-center gap-2.5 w-full">
-                {category.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-4 py-2 rounded-xl text-[13px] sm:text-sm font-semibold transition-colors"
-                    style={{ 
-                      backgroundColor: `${category.color}15`, 
-                      color: category.color,
-                      border: `1px solid ${category.color}30`
-                    }}
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+                {/* Skills Tags */}
+                <div className="flex flex-wrap justify-center gap-2.5 w-full mt-auto">
+                  {category.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-4 py-2 rounded-xl text-[13px] sm:text-sm font-bold transition-colors"
+                      style={{ 
+                        backgroundColor: `${category.color}15`, 
+                        color: category.color,
+                        border: `1px solid ${category.color}30`
+                      }}
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
       <SectionDivider />
