@@ -121,7 +121,7 @@ export default function Projects() {
         <div className="relative w-full group/carousel">
           <div 
             ref={scrollRef}
-            className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-8 px-1 items-stretch [&::-webkit-scrollbar]:hidden" 
+            className="flex gap-1 md:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-8 md:px-1 items-stretch [&::-webkit-scrollbar]:hidden" 
             style={{ scrollbarWidth: 'none' }}
           >
             {projects.map((p, i) => (
@@ -131,111 +131,114 @@ export default function Projects() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.15 }}
                 viewport={{ once: true }}
-                className={`glass-card rounded-2xl overflow-hidden group flex-shrink-0 w-full sm:w-[32rem] flex flex-col transition-all duration-300 snap-center sm:snap-start ${p.topProject ? 'border border-[var(--blue-glow)] shadow-[0_0_15px_rgba(59,130,246,0.15)] hover:shadow-[0_0_25px_rgba(59,130,246,0.3)]' : ''}`}
+                className={`glass-card rounded-2xl md:rounded-3xl overflow-hidden group flex-shrink-0 w-[92%] sm:w-[32rem] flex flex-col transition-all duration-300 snap-center sm:snap-start mx-[4%] md:mx-0 ${p.topProject ? 'border border-blue-500/30' : ''}`}
               >
-              {/* Thumbnail */}
+              {/* Thumbnail / Header */}
               <div
-                className={`h-48 bg-gradient-to-br ${p.bg} flex items-center justify-center relative overflow-hidden shrink-0`}
+                className={`h-56 sm:h-48 bg-gradient-to-br ${p.bg} flex items-center justify-center relative overflow-hidden shrink-0`}
               >
                 {/* Background glow */}
                 <div
-                  className="absolute inset-0 opacity-20"
+                  className="absolute inset-0 opacity-30 md:opacity-20"
                   style={{
                     background: `radial-gradient(circle at center, ${p.color}, transparent 70%)`,
                   }}
                 />
                 <span
-                  className="text-8xl font-black relative z-10 select-none"
-                  style={{ color: p.color, textShadow: `0 0 40px ${p.color}` }}
+                  className="text-9xl sm:text-8xl font-black relative z-10 select-none"
+                  style={{ color: p.color, textShadow: `0 0 50px ${p.color}` }}
                 >
                   {p.letter}
                 </span>
               </div>
 
               {/* Content */}
-              <div className="p-6 relative flex flex-col flex-grow">
+              <div className="p-6 sm:p-8 relative flex flex-col flex-grow">
                 {p.topProject && (
                   <div 
-                    className="absolute top-4 right-4 px-2 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase flex items-center justify-center border bg-blue-900/20 border-blue-500/40 text-blue-400"
+                    className="absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase flex items-center justify-center border bg-blue-900/40 border-blue-500/50 text-blue-400"
                   >
                     Top Project
                   </div>
                 )}
-                <h3 className="text-white font-bold text-lg mb-1">{p.title}</h3>
-                <p className="text-sm mb-3 font-medium" style={{ color: p.color }}>
+                <h3 className="text-white font-bold text-xl mb-1">{p.title}</h3>
+                <p className="text-sm mb-3 font-semibold" style={{ color: p.color }}>
                   {p.subtitle}
                 </p>
-                <p className="text-gray-400 text-sm leading-relaxed mb-4">
+                <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-6">
                   {p.description}
                 </p>
-                <div className="mb-5 space-y-1">
+                <div className="mb-6 space-y-2">
                   {p.highlights.map((highlight, idx) => (
                     <div key={idx} className="flex items-start gap-2">
-                      <span className="text-blue-400 mt-1">•</span>
+                      <span className="text-blue-400 mt-1.5 w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0" />
                       <span className="text-gray-300 text-sm">{highlight}</span>
                     </div>
                   ))}
                 </div>
-                <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-800/50">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between mt-auto pt-6 border-t border-white/5 gap-6">
                   <div className="flex gap-2 flex-wrap">
                     {p.tags.map((t) => (
                       <span
                         key={t}
-                        className="px-2 py-1 rounded-md bg-blue-900/30 text-blue-300 text-xs border border-blue-800/30"
+                        className="px-3 py-1 rounded-lg bg-blue-900/30 text-blue-300 text-[11px] font-medium border border-blue-800/30"
                       >
                         {t}
                       </span>
                     ))}
                   </div>
-                  <div className="flex gap-4 items-center">
-                    {p.github && (
-                      <motion.a
-                        href={p.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="text-gray-500 hover:text-blue-400 transition-colors flex items-center shrink-0"
-                        title="Source Code"
-                      >
-                        <Github size={18} />
-                      </motion.a>
-                    )}
-                    {p.contactSource && (
-                      <button 
-                        onClick={() => alert("Please contact the owner directly for the source code of this project.")}
-                        className="text-gray-500 hover:text-purple-400 transition-colors flex items-center shrink-0"
-                        title="Contact owner for source code"
-                      >
-                        <Github size={18} className="opacity-50" />
-                      </button>
-                    )}
-                    {p.download && (
-                      <motion.a
-                        href={p.download}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="text-gray-500 hover:text-green-400 transition-colors flex items-center shrink-0"
-                        title="Download APK"
-                      >
-                        <Download size={18} />
-                      </motion.a>
-                    )}
-                    {p.demo && (
-                      <motion.a
-                        href={p.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="text-gray-500 hover:text-blue-400 transition-colors flex items-center shrink-0"
-                        title="Live Demo"
-                      >
-                        <ExternalLink size={18} />
-                      </motion.a>
-                    )}
+                  <div className="flex gap-5 items-center justify-between sm:justify-end border-t sm:border-none border-white/5 pt-4 sm:pt-0">
+                    <span className="sm:hidden text-gray-500 text-xs font-medium uppercase tracking-widest">Links</span>
+                    <div className="flex gap-5">
+                      {p.github && (
+                        <motion.a
+                          href={p.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 text-gray-400 hover:text-blue-400 transition-colors shrink-0"
+                          title="Source Code"
+                        >
+                          <Github size={20} />
+                        </motion.a>
+                      )}
+                      {p.contactSource && (
+                        <button 
+                          onClick={() => alert("Please contact the owner directly for the source code of this project.")}
+                          className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 text-gray-400 hover:text-purple-400 transition-colors shrink-0"
+                          title="Contact owner for source code"
+                        >
+                          <Github size={20} className="opacity-50" />
+                        </button>
+                      )}
+                      {p.download && (
+                        <motion.a
+                          href={p.download}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="w-10 h-10 flex items-center justify-center rounded-xl bg-green-500/10 text-green-400 hover:text-green-300 transition-colors shrink-0"
+                          title="Download APK"
+                        >
+                          <Download size={20} />
+                        </motion.a>
+                      )}
+                      {p.demo && (
+                        <motion.a
+                          href={p.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="w-10 h-10 flex items-center justify-center rounded-xl bg-blue-500/10 text-blue-400 hover:text-blue-300 transition-colors shrink-0"
+                          title="Live Demo"
+                        >
+                          <ExternalLink size={20} />
+                        </motion.a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

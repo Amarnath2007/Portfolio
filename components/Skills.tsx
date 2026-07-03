@@ -43,7 +43,7 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative z-10 py-24">
+    <section id="skills" className="relative z-10 py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -51,16 +51,16 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <p className="text-blue-400 text-sm font-semibold tracking-[0.3em] uppercase mb-3">
+          <p className="text-blue-400 text-xs sm:text-sm font-semibold tracking-[0.3em] uppercase mb-3">
             — MY EXPERTISE —
           </p>
           <h2 className="text-4xl sm:text-5xl font-bold text-white">Skills</h2>
         </motion.div>
 
         {/* Categories Grid */}
-        <div className="flex flex-wrap justify-center gap-6 max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row md:flex-wrap justify-center gap-6 md:gap-8 max-w-7xl mx-auto">
           {skillCategories.map((category, idx) => (
             <motion.div
               key={category.title}
@@ -68,18 +68,18 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               viewport={{ once: true }}
-              className="glass-card rounded-2xl p-6 flex flex-col items-center justify-center text-center cursor-default hover:-translate-y-2 transition-transform duration-300 w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.33%-1.5rem)] xl:w-[calc(20%-1.5rem)] min-h-[280px]"
+              className="glass-card rounded-2xl md:rounded-3xl p-8 sm:p-10 flex flex-col items-center justify-center text-center cursor-default hover:-translate-y-2 transition-transform duration-300 w-[95%] mx-auto md:mx-0 md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)] xl:w-[calc(20%-1.5rem)] min-h-[300px] border border-white/5"
             >
               {/* Category Icon */}
               <div
-                className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl mb-5 shadow-lg"
+                className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-xl"
                 style={{ backgroundColor: category.bg }}
               >
                 <span style={{ color: category.color }}>{category.icon}</span>
               </div>
 
               {/* Category Title */}
-              <h3 className="text-white font-bold text-lg mb-4 w-full pb-3 border-b border-white/10 shrink-0">
+              <h3 className="text-white font-bold text-xl mb-5 w-full pb-3 border-b border-white/10 shrink-0">
                 {category.title}
               </h3>
 
@@ -88,7 +88,7 @@ export default function Skills() {
                 {category.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors"
+                    className="px-4 py-2 rounded-xl text-[13px] sm:text-sm font-semibold transition-colors"
                     style={{ 
                       backgroundColor: `${category.color}15`, 
                       color: category.color,

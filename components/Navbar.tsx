@@ -123,7 +123,7 @@ export default function Navbar() {
                     GitHub
                   </a>
                   <a
-                    href="https://www.linkedin.com/in/amarnath-b-b7b79b39a/"
+                    href="https://www.linkedin.com/in/amarnath2007"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-900/20 text-gray-300 hover:text-white transition-all text-sm"
@@ -132,7 +132,7 @@ export default function Navbar() {
                     LinkedIn
                   </a>
                   <a
-                    href="https://www.instagram.com/its_me_amar2007?utm_source=qr&igsh=MWt2NzJnMDMwejh6OA=="
+                    href="https://www.instagram.com/da_matrix_404?igsh=MWpvbW15NXU4MG5sbA=="
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-900/20 text-gray-300 hover:text-white transition-all text-sm"
@@ -147,43 +147,77 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-gray-300 hover:text-white"
+            className="md:hidden text-gray-300 hover:text-white z-50"
             onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
           >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Slide-in */}
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#020818]/95 backdrop-blur-xl border-t border-blue-900/30"
-          >
-            <div className="px-4 py-4 space-y-1">
-              {navLinks.map((link) => (
-                <button
-                  key={link.label}
-                  onClick={() => scrollTo(link.href)}
-                  className="block w-full text-left px-4 py-3 text-gray-300 hover:text-white hover:bg-blue-900/20 rounded-lg transition-all text-sm"
-                >
-                  {link.label}
-                </button>
-              ))}
-              <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=amarmicrosoft2021@gmail.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full text-left px-4 py-3 text-blue-400 hover:bg-blue-900/20 rounded-lg transition-all text-sm"
-              >
-                Contact Me
-              </a>
-            </div>
-          </motion.div>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMenuOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+            />
+            {/* Drawer */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 bottom-0 w-[280px] bg-[#020818] border-l border-blue-900/30 z-50 md:hidden p-6 flex flex-col"
+            >
+              <div className="flex justify-between items-center mb-8">
+                <div className="text-xl font-bold cursor-pointer" onClick={() => { scrollTo("#home"); setMenuOpen(false); }}>
+                  <span className="text-white">Portfolio</span>
+                  <span className="text-blue-400">.</span>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                {navLinks.map((link) => (
+                  <button
+                    key={link.label}
+                    onClick={() => scrollTo(link.href)}
+                    className="flex items-center px-4 py-4 text-gray-300 hover:text-white hover:bg-blue-600/10 rounded-xl transition-all text-base font-medium border border-transparent hover:border-blue-500/20"
+                  >
+                    {link.label}
+                  </button>
+                ))}
+              </div>
+
+              <div className="mt-auto pt-6 border-t border-blue-900/30">
+                <p className="text-xs text-gray-500 uppercase tracking-widest mb-4 font-semibold px-4">Socials</p>
+                <div className="grid grid-cols-4 gap-2 px-2">
+                  {[
+                    { icon: Mail, href: "https://mail.google.com/mail/?view=cm&fs=1&to=amarmicrosoft2021@gmail.com" },
+                    { icon: Github, href: "https://github.com/Amarnath2007" },
+                    { icon: Linkedin, href: "https://www.linkedin.com/in/amarnath2007" },
+                    { icon: Instagram, href: "https://www.instagram.com/da_matrix_404?igsh=MWpvbW15NXU4MG5sbA==" },
+                  ].map((social, i) => (
+                    <a
+                      key={i}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 flex items-center justify-center rounded-lg bg-blue-900/20 text-blue-400 hover:bg-blue-400 hover:text-white transition-all border border-blue-500/20"
+                    >
+                      <social.icon size={18} />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </motion.nav>

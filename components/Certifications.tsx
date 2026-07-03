@@ -82,7 +82,7 @@ export default function Certifications() {
     }
   };
   return (
-    <section id="certifications" className="relative z-10 py-24">
+    <section id="certifications" className="relative z-10 py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -90,9 +90,9 @@ export default function Certifications() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <p className="text-blue-400 text-sm font-semibold tracking-[0.3em] uppercase mb-3">
+          <p className="text-blue-400 text-xs sm:text-sm font-semibold tracking-[0.3em] uppercase mb-3">
             — MY CREDENTIALS —
           </p>
           <h2 className="text-4xl sm:text-5xl font-bold text-white">Certifications</h2>
@@ -102,7 +102,7 @@ export default function Certifications() {
         <div className="relative group/carousel">
           <div 
             ref={scrollRef}
-            className="flex gap-6 overflow-x-auto scroll-smooth pb-8 px-1 items-stretch [&::-webkit-scrollbar]:hidden ms-auto" 
+            className="flex gap-4 md:gap-6 overflow-x-auto scroll-smooth pb-8 md:px-1 items-stretch [&::-webkit-scrollbar]:hidden ms-auto" 
             style={{ scrollbarWidth: 'none' }}
           >
             {certs.map((cert, i) => (
@@ -112,34 +112,34 @@ export default function Certifications() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.15 }}
                 viewport={{ once: true }}
-                className="glass-card rounded-2xl p-7 group flex-shrink-0 w-full sm:w-96 scroll-snap-align-start flex flex-col"
+                className="glass-card rounded-2xl md:rounded-3xl p-8 sm:p-10 group flex-shrink-0 w-[95%] sm:w-96 scroll-snap-align-start flex flex-col border border-white/5 mx-auto md:mx-0"
               >
                 {/* Badge Icon */}
                 <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-lg"
                   style={{ backgroundColor: cert.bg }}
                 >
-                  <BadgeCheck size={24} style={{ color: cert.color }} />
+                  <BadgeCheck size={28} style={{ color: cert.color }} />
                 </div>
 
                 {/* Title */}
-                <h3 className="text-white font-bold text-base mb-1">{cert.title}</h3>
-                <p className="text-sm font-medium mb-4" style={{ color: cert.color }}>
+                <h3 className="text-white font-bold text-lg sm:text-xl mb-1">{cert.title}</h3>
+                <p className="text-sm font-semibold mb-4" style={{ color: cert.color }}>
                   {cert.issuer}
                 </p>
 
                 {/* Description */}
-                <p className="text-gray-400 text-sm leading-relaxed mb-5">{cert.description}</p>
+                <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-6">{cert.description}</p>
 
                 {/* Link */}
-                <div className="mt-auto pt-5 border-t border-gray-800/50">
+                <div className="mt-auto pt-6 border-t border-white/5">
                   <a 
                     href={(cert as any).file_url || "#"} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-xs text-gray-500 group-hover:text-blue-400 transition-colors cursor-pointer"
+                    className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 group-hover:text-blue-400 font-medium transition-colors cursor-pointer"
                   >
-                    <ExternalLink size={12} />
+                    <ExternalLink size={14} />
                     <span>View Certificate</span>
                   </a>
                 </div>

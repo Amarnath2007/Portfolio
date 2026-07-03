@@ -101,7 +101,7 @@ export default function Achievements() {
         </div>
 
         {/* Centered Cards Grid */}
-        <div className="flex flex-wrap justify-center gap-8 max-w-6xl mx-auto">
+        <div className="flex flex-col md:flex-row flex-wrap justify-center gap-6 md:gap-8 lg:gap-10 max-w-6xl mx-auto">
           {achievements.map((item, i) => {
             const Icon = item.icon;
             return (
@@ -111,12 +111,12 @@ export default function Achievements() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="glass-card relative rounded-2xl p-8 w-full sm:w-[320px] cursor-default flex flex-col group justify-between overflow-hidden"
+                className="glass-card relative rounded-2xl md:rounded-3xl p-8 sm:p-10 w-[95%] sm:w-[350px] mx-auto md:mx-0 cursor-default flex flex-col group justify-between overflow-hidden border border-white/5"
               >
                 {/* Floating Badge */}
                 {item.highlight && (
                   <div 
-                    className="absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase flex items-center justify-center border"
+                    className="absolute top-4 right-4 px-3 py-1.5 rounded-full text-[10px] font-bold tracking-wider uppercase flex items-center justify-center border"
                     style={{ 
                       backgroundColor: `${item.iconColor}15`,
                       borderColor: `${item.iconColor}40`,
@@ -128,37 +128,37 @@ export default function Achievements() {
                   </div>
                 )}
 
-                <div className="pr-12">
-                  <div className="flex items-center gap-4 mb-4">
+                <div className="pr-12 md:pr-0">
+                  <div className="flex items-center gap-5 mb-6">
                     <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                      className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg"
                       style={{ backgroundColor: item.iconBg }}
                     >
-                      <Icon size={22} style={{ color: item.iconColor }} />
+                      <Icon size={24} style={{ color: item.iconColor }} />
                     </div>
                     <div>
-                      <h3 className="text-white font-bold text-base leading-tight pr-2">{item.title}</h3>
-                      <p className="text-xs font-medium" style={{ color: item.iconColor }}>
+                      <h3 className="text-white font-bold text-lg sm:text-xl leading-tight pr-2">{item.title}</h3>
+                      <p className="text-sm font-semibold" style={{ color: item.iconColor }}>
                         {item.subtitle}
                       </p>
                     </div>
                   </div>
 
-                  <p className="text-gray-400 text-sm leading-relaxed mb-6">{item.description}</p>
+                  <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-8">{item.description}</p>
                 </div>
 
                 <Link href={`/achievements/${item.category}`} className="w-full">
                   <motion.button
                     whileHover={{ 
                       scale: 1.02, 
-                      backgroundColor: "rgba(10, 102, 194, 0.1)",
-                      borderColor: "#0A66C2"
+                      backgroundColor: "rgba(59, 130, 246, 0.15)",
+                      borderColor: "#3b82f6"
                     }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-blue-500/20 bg-blue-500/5 text-blue-400 text-sm font-semibold transition-all duration-300"
+                    className="w-full flex items-center justify-center gap-2 py-4 rounded-xl border border-blue-500/20 bg-blue-500/5 text-blue-400 text-sm font-bold transition-all duration-300"
                   >
                     View Certificates
-                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </motion.button>
                 </Link>
               </motion.div>

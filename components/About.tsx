@@ -45,13 +45,13 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
-          className="glass-card rounded-3xl p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-2 gap-10"
+          className="glass-card rounded-3xl p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10"
         >
           {/* Left Column */}
-          <div>
+          <div className="text-center lg:text-left">
             {/* Avatar + Name */}
-            <div className="flex items-start gap-5 mb-6">
-              <div className="relative w-20 h-20 rounded-2xl overflow-hidden border-2 border-blue-500/50 flex-shrink-0 animate-pulse-glow">
+            <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4 lg:gap-5 mb-6">
+              <div className="relative w-20 h-20 rounded-2xl overflow-hidden border-2 border-blue-500/50 flex-shrink-0 animate-pulse-glow mx-auto lg:mx-0">
                 <Image
                   src="/photo.jpg"
                   alt="Amarnath B"
@@ -64,18 +64,18 @@ export default function About() {
                   }}
                 />
               </div>
-              <div>
-                <p className="text-blue-400 text-xs font-semibold tracking-wider uppercase mb-1">
-                  ABOUT ME
+              <div className="mt-2 lg:mt-0">
+                <p className="text-blue-400 text-[10px] sm:text-xs font-semibold tracking-wider uppercase mb-1">
+                  — ABOUT ME —
                 </p>
-                <h3 className="text-2xl font-bold text-white">
+                <h3 className="text-2xl sm:text-3xl font-bold text-white">
                   I&apos;m Amarnath
                 </h3>
               </div>
             </div>
 
             {/* Bio */}
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+            <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-6 max-w-2xl mx-auto lg:mx-0">
               I&apos;m a BCA student at PSG CAS, Coimbatore — an enthusiastic coder
               passionate about competitive programming, hackathons, and tech
               innovation. With 15+ competition wins and a strong interest in AI
@@ -86,12 +86,12 @@ export default function About() {
             {/* Currently Learning */}
             <div className="mb-6">
               <h4 className="text-white font-semibold text-sm mb-3">Currently Learning 🚀</h4>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap justify-center lg:justify-start gap-2">
                 {["Next.js", "TypeScript", "Advanced System Design"].map((skill) => (
                   <motion.span
                     key={skill}
                     whileHover={{ scale: 1.05, borderColor: "rgba(52,211,153,0.6)" }}
-                    className="px-3 py-1 rounded-lg bg-emerald-900/30 border border-emerald-800/40 text-emerald-300 text-xs font-medium cursor-default transition-all"
+                    className="px-3 py-1.5 rounded-lg bg-emerald-900/30 border border-emerald-800/40 text-emerald-300 text-[11px] sm:text-xs font-medium cursor-default transition-all"
                   >
                     {skill}
                   </motion.span>
@@ -100,12 +100,12 @@ export default function About() {
             </div>
 
             {/* Tags */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-2">
               {tags.map((t) => (
                 <motion.span
-                  key={t}
-                  whileHover={{ scale: 1.05, borderColor: "rgba(96,165,250,0.6)" }}
-                  className="px-3 py-1 rounded-lg bg-blue-900/30 border border-blue-800/40 text-blue-300 text-xs font-medium cursor-default transition-all"
+                   key={t}
+                   whileHover={{ scale: 1.05, borderColor: "rgba(96,165,250,0.6)" }}
+                   className="px-3 py-1.5 rounded-lg bg-blue-900/30 border border-blue-800/40 text-blue-300 text-[11px] sm:text-xs font-medium cursor-default transition-all"
                 >
                   {t}
                 </motion.span>
@@ -116,10 +116,10 @@ export default function About() {
           {/* Right Column */}
           <div className="flex flex-col gap-6">
             {/* Details */}
-            <div className="space-y-4">
+            <div className="space-y-4 bg-white/5 p-5 rounded-2xl border border-blue-900/20">
               {details.map((d) => (
-                <div key={d.label} className="flex items-start gap-4">
-                  <span className="text-gray-500 text-sm w-28 flex-shrink-0 pt-0.5">
+                <div key={d.label} className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-4 pb-3 sm:pb-0 border-b border-white/5 sm:border-none last:border-none last:pb-0">
+                  <span className="text-gray-500 text-xs sm:text-sm w-full sm:w-28 flex-shrink-0">
                     {d.label}
                   </span>
                   <span
@@ -141,12 +141,12 @@ export default function About() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4, delay: i * 0.1 }}
                   viewport={{ once: true }}
-                  className="text-center py-3"
+                  className="text-center py-2"
                 >
-                  <div className="text-3xl font-black text-blue-400 glow-text">
+                  <div className="text-2xl sm:text-3xl font-black text-blue-400 glow-text">
                     {s.value}
                   </div>
-                  <div className="text-gray-500 text-xs mt-1">{s.label}</div>
+                  <div className="text-gray-500 text-[10px] sm:text-xs mt-1 font-medium">{s.label}</div>
                 </motion.div>
               ))}
             </div>
