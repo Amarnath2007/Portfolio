@@ -51,20 +51,7 @@ export default function About() {
           <div className="text-center lg:text-left">
             {/* Avatar + Name */}
             <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4 lg:gap-5 mb-6">
-              <div className="relative w-20 h-20 rounded-2xl overflow-hidden border-2 border-blue-500/50 flex-shrink-0 animate-pulse-glow mx-auto lg:mx-0">
-                <Image
-                  src="/photo.jpg"
-                  alt="Amarnath B"
-                  fill
-                  className="object-cover object-top"
-                  onError={(e) => {
-                    const t = e.target as HTMLImageElement;
-                    t.src =
-                      "https://via.placeholder.com/160x160/081428/3b82f6?text=AB";
-                  }}
-                />
-              </div>
-              <div className="mt-2 lg:mt-0">
+              <div className="text-center lg:text-left">
                 <p className="text-blue-400 text-[10px] sm:text-xs font-semibold tracking-wider uppercase mb-1">
                   — ABOUT ME —
                 </p>
