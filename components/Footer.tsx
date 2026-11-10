@@ -6,65 +6,76 @@ import { ChevronUp, Mail, Github, Linkedin, Instagram } from "lucide-react";
 const navLinks = [
   "Home",
   "Skills",
+  "Experience",
   "Achievements",
   "Certifications",
   "Projects",
   "About",
+  "Contact",
 ];
 
 export default function Footer() {
   const scrollTo = (id: string) => {
-    document
-      .getElementById(id.toLowerCase())
-      ?.scrollIntoView({ behavior: "smooth" });
+    const el = document.getElementById(id.toLowerCase());
+    if (el) {
+      const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+      const navOffset = isMobile ? 72 : 96;
+      const elementPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
   };
 
   const scrollTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
  
   return (
-    <footer className="relative z-10 border-t border-blue-900/30 pt-16 pb-10">
+    <footer className="relative z-10 border-t border-[#302D28] pt-16 pb-12 bg-[#0B0B0C]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Content Group */}
         <div className="flex flex-col items-center gap-8 mb-12">
           {/* Logo */}
-          <div className="text-3xl font-bold flex flex-col items-center gap-1">
+          <div className="text-3xl font-bold flex flex-col items-center gap-1.5 font-heading">
             <div>
-              <span className="text-white">Portfolio</span>
-              <span className="text-blue-400">.</span>
+              <span className="text-[#F4F0E8]">Portfolio</span>
+              <span className="text-[#C7A46A]">.</span>
             </div>
-            <div className="h-1 w-8 bg-blue-500 rounded-full" />
+            <div className="h-0.5 w-8 bg-[#C7A46A] rounded-full" />
           </div>
 
-          {/* Social Links - Increased gap for mobile */}
-          <div className="flex items-center gap-6 sm:gap-4">
+          {/* Social Links */}
+          <div className="flex items-center gap-4 sm:gap-3">
             {[
-              { icon: Mail, href: "https://mail.google.com/mail/?view=cm&fs=1&to=amarmicrosoft2021@gmail.com" },
-              { icon: Github, href: "https://github.com/Amarnath2007" },
-              { icon: Linkedin, href: "https://www.linkedin.com/in/amarnath2007" },
-              { icon: Instagram, href: "https://www.instagram.com/da_matrix_404?igsh=MWpvbW15NXU4MG5sbA==" },
-            ].map(({ icon: Icon, href }) => (
+              { icon: Mail, href: "https://mail.google.com/mail/?view=cm&fs=1&to=amarmicrosoft2021@gmail.com", label: "Email" },
+              { icon: Github, href: "https://github.com/Amarnath2007", label: "GitHub" },
+              { icon: Linkedin, href: "https://www.linkedin.com/in/amarnath2007", label: "LinkedIn" },
+              { icon: Instagram, href: "https://www.instagram.com/da_matrix_404?igsh=MWpvbW15NXU4MG5sbA==", label: "Instagram" },
+            ].map(({ icon: Icon, href, label }) => (
               <motion.a
                 key={href}
                 href={href}
                 target={href.startsWith("mailto:") ? undefined : "_blank"}
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.15, y: -2 }}
-                whileTap={{ scale: 0.9 }}
-                className="w-12 h-12 sm:w-10 sm:h-10 flex items-center justify-center rounded-xl bg-blue-900/10 border border-blue-900/40 text-gray-400 hover:text-blue-400 hover:border-blue-400 transition-all shadow-lg"
+                whileHover={{ scale: 1.08, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-11 h-11 flex items-center justify-center rounded-xl bg-[#151517] border border-[#302D28] text-[#A7A198] hover:text-[#C7A46A] hover:border-[#C7A46A]/50 transition-all shadow-md"
+                aria-label={label}
               >
-                <Icon size={20} />
+                <Icon size={18} />
               </motion.a>
             ))}
           </div>
         </div>
 
-        {/* Nav Links - Better spacing on mobile */}
-        <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-12 border-y border-white/5 py-8">
+        {/* Nav Links */}
+        <div className="flex flex-wrap justify-center gap-x-6 sm:gap-x-8 gap-y-3 sm:gap-y-4 mb-12 border-y border-[#302D28]/60 py-6">
           {navLinks.map((l) => (
             <button
               key={l}
               onClick={() => scrollTo(l)}
-              className="text-gray-400 hover:text-blue-400 text-sm font-medium transition-colors uppercase tracking-widest text-[11px] sm:text-xs"
+              className="text-[#A7A198] hover:text-[#C7A46A] text-xs font-semibold transition-colors uppercase tracking-widest"
             >
               {l}
             </button>
@@ -73,16 +84,16 @@ export default function Footer() {
 
         {/* Bottom Row */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-          <p className="text-gray-600 text-sm order-last sm:order-first">
+          <p className="text-[#A7A198]/70 text-xs sm:text-sm order-last sm:order-first">
             © 2026 Amarnath B. All Rights Reserved.
           </p>
 
           {/* Scroll to top */}
           <motion.button
             onClick={scrollTop}
-            whileHover={{ scale: 1.1, y: -2 }}
-            whileTap={{ scale: 0.9 }}
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-500/20 text-blue-400 hover:bg-blue-600/20 transition-all text-xs font-bold uppercase tracking-wider"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#151517] border border-[#302D28] text-[#C7A46A] hover:border-[#C7A46A]/50 hover:bg-[#C7A46A]/10 transition-all text-xs font-semibold uppercase tracking-wider"
           >
             <span>Back to top</span>
             <ChevronUp size={14} />

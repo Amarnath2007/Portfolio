@@ -1,176 +1,185 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { Code2, Sparkles } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import SectionDivider from "./SectionDivider";
+import { DEVELOPMENT_SKILLS_TICKER, AI_TOOLS_TICKER } from "@/lib/skills-data";
 
-const skillCategories = [
-  {
-    title: "Programming",
-    icon: "💻",
-    skills: ["C", "C++", "Python", "Java"],
-    color: "#60a5fa",
-    bg: "#1e3a5f"
-  },
-  {
-    title: "Frontend",
-    icon: "🎨",
-    skills: ["HTML", "CSS", "JavaScript", "React", "Next.js", "Tailwind CSS"],
-    color: "#f472b6",
-    bg: "#500724"
-  },
-  {
-    title: "Backend & Database",
-    icon: "🗄️",
-    skills: ["Node.js", "SQL", "Supabase", "File Handling"],
-    color: "#34d399",
-    bg: "#064e3b"
-  },
-  {
-    title: "Application Development",
-    icon: "📱",
-    skills: ["Flutter", "Kotlin", "Java"],
-    color: "#818cf8",
-    bg: "#1e1b4b"
-  },
-  {
-    title: "Core Competencies",
-    icon: "🧠",
-    skills: ["Problem Solving", "Data Structures", "Algorithms", "AI Tools", "Debugging"],
-    color: "#fb923c",
-    bg: "#431407"
-  }
-];
+interface SkillsProps {
+  data?: any;
+}
 
-export default function Skills() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [showLeft, setShowLeft] = useState(false);
-  const [showRight, setShowRight] = useState(true);
+export default function Skills({ data }: SkillsProps) {
+  // Multiply arrays to create an unbroken seamless ticker loop
+  const devList = [
+    ...DEVELOPMENT_SKILLS_TICKER,
+    ...DEVELOPMENT_SKILLS_TICKER,
+    ...DEVELOPMENT_SKILLS_TICKER,
+    ...DEVELOPMENT_SKILLS_TICKER,
+  ];
 
-  // Handle scroll arrows visibility
-  const handleScroll = () => {
-    if (scrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setShowLeft(scrollLeft > 20);
-      setShowRight(scrollLeft < scrollWidth - clientWidth - 20);
-    }
-  };
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (el) {
-      el.addEventListener("scroll", handleScroll);
-      handleScroll(); // Initial check
-    }
-    return () => el?.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scroll = (dir: "left" | "right") => {
-    if (scrollRef.current) {
-      const { clientWidth } = scrollRef.current;
-      const scrollAmount = dir === "left" ? -clientWidth / 1.5 : clientWidth / 1.5;
-      scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    }
-  };
+  const aiList = [
+    ...AI_TOOLS_TICKER,
+    ...AI_TOOLS_TICKER,
+    ...AI_TOOLS_TICKER,
+    ...AI_TOOLS_TICKER,
+  ];
 
   return (
-    <section id="skills" className="relative z-10 py-16 md:py-24">
+    <section id="skills" className="relative z-10 pt-10 md:pt-14 pb-0 scroll-mt-24 md:scroll-mt-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        {/* Section Heading matching Image 2 */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-8 md:mb-12"
         >
-          <p className="text-blue-400 text-xs sm:text-sm font-semibold tracking-[0.3em] uppercase mb-3">
-            — MY EXPERTISE —
-          </p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white">Skills</h2>
+          {/* Top Line: MY EXPERTISE with flanking gold lines */}
+          <div className="flex items-center justify-center gap-3 mb-2.5">
+            <div className="h-[1px] w-8 sm:w-14 bg-gradient-to-r from-transparent to-[#C7A46A]" />
+            <span className="text-[#C7A46A] text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase font-heading">
+              MY EXPERTISE
+            </span>
+            <div className="h-[1px] w-8 sm:w-14 bg-gradient-to-l from-transparent to-[#C7A46A]" />
+          </div>
+
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold font-heading tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-[#FFFDF9] via-[#F4F0E8] to-[#D8BC8A]">
+            Skills
+          </h2>
         </motion.div>
 
-        {/* Categories Carousel */}
-        <div className="relative group/carousel px-1">
-          {/* Left Arrow */}
-          <AnimatePresence>
-            {showLeft && (
-              <motion.button
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                onClick={() => scroll("left")}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-6 z-40 w-12 h-12 md:w-14 md:h-14 rounded-full bg-blue-900/40 border border-blue-400/30 text-blue-400 flex items-center justify-center backdrop-blur-md shadow-lg shadow-blue-500/20 hover:bg-blue-600 hover:text-white transition-all duration-300"
-              >
-                <ChevronLeft size={28} />
-              </motion.button>
-            )}
-          </AnimatePresence>
+        {/* TWO Large, Wide, Premium Ticker Containers */}
+        <div className="flex flex-col space-y-5 sm:space-y-6">
+          {/* CONTAINER 1: Development Skills (Moving Left to Right) */}
+          <div className="relative w-full rounded-2xl sm:rounded-full bg-[#0D0D10]/95 border border-[#C7A46A]/40 shadow-[0_0_25px_rgba(199,164,106,0.12)] backdrop-blur-md h-[88px] sm:h-[96px] flex items-center overflow-hidden">
+            {/* FIXED LEFT SIDE */}
+            <div className="flex items-center gap-2.5 sm:gap-3.5 pl-4 sm:pl-6 pr-3 sm:pr-4 shrink-0 z-20 bg-[#0D0D10] h-full">
+              {/* Golden code icon inside rounded square */}
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#141418] border border-[#2F2C27] text-[#C7A46A] flex items-center justify-center shrink-0 shadow-inner">
+                <Code2 size={21} className="text-[#C7A46A]" />
+              </div>
 
-          {/* Right Arrow */}
-          <AnimatePresence>
-            {showRight && (
-              <motion.button
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                onClick={() => scroll("right")}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-6 z-40 w-12 h-12 md:w-14 md:h-14 rounded-full bg-blue-900/40 border border-blue-400/30 text-blue-400 flex items-center justify-center backdrop-blur-md shadow-lg shadow-blue-500/20 hover:bg-blue-600 hover:text-white transition-all duration-300"
-              >
-                <ChevronRight size={28} />
-              </motion.button>
-            )}
-          </AnimatePresence>
+              {/* Heading */}
+              <div className="flex flex-col justify-center leading-tight">
+                <span className="text-xs sm:text-sm font-bold text-[#F4F0E8] font-heading whitespace-nowrap">
+                  Development
+                </span>
+                <span className="text-xs sm:text-sm font-bold text-[#F4F0E8] font-heading whitespace-nowrap">
+                  Skills
+                </span>
+              </div>
 
-          <div 
-            ref={scrollRef}
-            className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-6 pb-10 px-4 md:px-0 scroll-smooth [&::-webkit-scrollbar]:hidden" 
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            {skillCategories.map((category, idx) => (
-              <motion.div
-                key={category.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                viewport={{ once: true }}
-                className="glass-card rounded-2xl md:rounded-3xl p-8 sm:p-10 flex flex-col items-center justify-center text-center cursor-default hover:-translate-y-2 transition-transform duration-300 w-[85%] sm:w-[350px] md:w-[400px] flex-shrink-0 snap-center border border-white/5 min-h-[350px]"
-              >
-                {/* Category Icon */}
-                <div
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-xl"
-                  style={{ backgroundColor: category.bg }}
-                >
-                  <span style={{ color: category.color }}>{category.icon}</span>
-                </div>
+              {/* Thin vertical separator */}
+              <div className="w-[1px] h-8 sm:h-10 bg-[#2F2C27] shrink-0 ml-1 sm:ml-2" />
+            </div>
 
-                {/* Category Title */}
-                <h3 className="text-white font-bold text-xl md:text-2xl mb-5 w-full pb-3 border-b border-white/10 shrink-0">
-                  {category.title}
-                </h3>
+            {/* RIGHT SIDE (Moving Ticker) */}
+            <div className="relative flex-1 overflow-hidden h-full flex items-center">
+              {/* Subtle edge fade masks */}
+              <div className="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-16 bg-gradient-to-r from-[#0D0D10] to-transparent z-10" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-16 bg-gradient-to-l from-[#0D0D10] to-transparent z-10" />
 
-                {/* Skills Tags */}
-                <div className="flex flex-wrap justify-center gap-2.5 w-full mt-auto">
-                  {category.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-4 py-2 rounded-xl text-[13px] sm:text-sm font-bold transition-colors"
-                      style={{ 
-                        backgroundColor: `${category.color}15`, 
-                        color: category.color,
-                        border: `1px solid ${category.color}30`
-                      }}
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+              {/* Ticker Row */}
+              <div className="flex w-max items-center animate-ticker-right hover:[animation-play-state:paused] focus-within:[animation-play-state:paused] motion-reduce:animate-none">
+                {devList.map((skill, index) => (
+                  <div key={`dev-${skill.name}-${index}`} className="flex items-center">
+                    <div className="flex flex-col items-center justify-center group/item cursor-default select-none px-1">
+                      <div className="w-6 h-6 sm:w-7 sm:h-7 relative flex items-center justify-center mb-1">
+                        <Image
+                          src={skill.icon}
+                          alt={skill.name}
+                          width={28}
+                          height={28}
+                          className="object-contain w-full h-full"
+                        />
+                      </div>
+                      <span className="text-[11px] sm:text-xs font-medium text-[#F4F0E8] text-center whitespace-nowrap tracking-tight">
+                        {skill.name}
+                      </span>
+                    </div>
+
+                    {/* Small gold dot separator */}
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#C7A46A] shadow-[0_0_6px_#C7A46A] shrink-0 mx-4 sm:mx-6" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* CONTAINER 2: AI Tools (Moving Right to Left) */}
+          <div className="relative w-full rounded-2xl sm:rounded-full bg-[#0D0D10]/95 border border-[#C7A46A]/40 shadow-[0_0_25px_rgba(199,164,106,0.12)] backdrop-blur-md h-[88px] sm:h-[96px] flex items-center overflow-hidden">
+            {/* FIXED LEFT SIDE */}
+            <div className="flex items-center gap-2.5 sm:gap-3.5 pl-4 sm:pl-6 pr-3 sm:pr-4 shrink-0 z-20 bg-[#0D0D10] h-full">
+              {/* Golden sparkles icon inside rounded square */}
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#141418] border border-[#2F2C27] text-[#C7A46A] flex items-center justify-center shrink-0 shadow-inner">
+                <Sparkles size={21} className="text-[#C7A46A]" />
+              </div>
+
+              {/* Heading */}
+              <div className="flex items-center">
+                <span className="text-xs sm:text-sm font-bold text-[#F4F0E8] font-heading whitespace-nowrap">
+                  AI Tools
+                </span>
+              </div>
+
+              {/* Thin vertical separator */}
+              <div className="w-[1px] h-8 sm:h-10 bg-[#2F2C27] shrink-0 ml-1 sm:ml-2" />
+            </div>
+
+            {/* RIGHT SIDE (Moving Ticker) */}
+            <div className="relative flex-1 overflow-hidden h-full flex items-center">
+              {/* Subtle edge fade masks */}
+              <div className="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-16 bg-gradient-to-r from-[#0D0D10] to-transparent z-10" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-16 bg-gradient-to-l from-[#0D0D10] to-transparent z-10" />
+
+              {/* Ticker Row */}
+              <div className="flex w-max items-center animate-ticker-left hover:[animation-play-state:paused] focus-within:[animation-play-state:paused] motion-reduce:animate-none">
+                {aiList.map((tool, index) => (
+                  <div key={`ai-${tool.name}-${index}`} className="flex items-center">
+                    <div className="flex flex-col items-center justify-center group/item cursor-default select-none px-1">
+                      <div className="w-6 h-6 sm:w-7 sm:h-7 relative flex items-center justify-center mb-1">
+                        <Image
+                          src={tool.icon}
+                          alt={tool.name}
+                          width={28}
+                          height={28}
+                          className="object-contain w-full h-full"
+                        />
+                      </div>
+                      <span className="text-[11px] sm:text-xs font-medium text-[#F4F0E8] text-center whitespace-nowrap tracking-tight">
+                        {tool.name}
+                      </span>
+                    </div>
+
+                    {/* Small gold dot separator */}
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#C7A46A] shadow-[0_0_6px_#C7A46A] shrink-0 mx-4 sm:mx-6" />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
+
+        {/* Common View All Skills Button flanked by gold gradient accent lines */}
+        <div className="flex items-center justify-center gap-4 sm:gap-6 mt-10 md:mt-12">
+          <div className="hidden sm:block h-[1px] w-16 sm:w-28 bg-gradient-to-r from-transparent to-[#C7A46A]/60" />
+          <Link
+            href="/skills"
+            className="group inline-flex items-center gap-2 px-7 py-3 rounded-full border border-[#C7A46A]/60 bg-[#0D0D10] hover:bg-[#C7A46A] text-[#C7A46A] hover:text-[#0B0B0C] font-heading font-semibold text-xs sm:text-sm tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(199,164,106,0.15)] hover:shadow-[0_0_30px_rgba(199,164,106,0.4)] hover:scale-[1.02] active:scale-[0.98]"
+          >
+            <span>View All Skills</span>
+            <span className="text-base transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+              ↗
+            </span>
+          </Link>
+          <div className="hidden sm:block h-[1px] w-16 sm:w-28 bg-gradient-to-l from-transparent to-[#C7A46A]/60" />
+        </div>
       </div>
+
       <SectionDivider />
     </section>
   );

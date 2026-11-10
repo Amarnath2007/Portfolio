@@ -4,7 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { BadgeCheck, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import SectionDivider from "./SectionDivider";
-import { supabase } from "@/lib/supabase";
+import CertificateModal, { CertificateModalData } from "./CertificateModal";
+import type { Certification } from "@/lib/portfolio-data";
 
 const initialCerts = [
   {
@@ -12,65 +13,59 @@ const initialCerts = [
     issuer: "CSC (Computer Science Corporation)",
     fileName: "Hdca.pdf",
     description: "Comprehensive programming certification covering hardware and software fundamentals alongside core coding skills.",
-    color: "#60a5fa",
-    bg: "#0c1a40",
   },
   {
     title: "Introduction to C",
     issuer: "NPTEL",
     fileName: "Nptel.pdf",
     description: "Officially certified by NPTEL, India's premier e-learning platform backed by IITs and IISc, covering C programming fundamentals.",
-    color: "#34d399",
-    bg: "#064e3b",
   },
   {
     title: "SEO for WordPress",
     issuer: "Udemy",
     fileName: "seo-udemy.pdf",
     description: "Completed training on search engine optimization techniques, web content strategy, and WordPress website management.",
-    color: "#f472b6",
-    bg: "#4c0519",
   },
   {
     title: "AI Tools Workshop",
     issuer: "Be10x",
     fileName: "B10x.pdf",
     description: "Successfully completed an intensive workshop on AI tools, focusing on productivity enhancement and advanced generative AI workflows.",
-    color: "#a78bfa",
-    bg: "#2e1065",
   },
 ];
 
-export default function Certifications() {
-  const [certs, setCerts] = useState(initialCerts);
+interface CertificationsProps {
+  data?: Certification[];
+}
+
+export default function Certifications({ data }: CertificationsProps) {
+  const [certs, setCerts] = useState<any[]>(data !== undefined ? data : initialCerts);
+  const [selectedCert, setSelectedCert] = useState<CertificateModalData | null>(null);
 
   useEffect(() => {
+    if (data !== undefined) {
+      setCerts(data);
+      return;
+    }
+
     async function fetchCerts() {
       try {
-        // Try to fetch from database table first
-        const { data, error } = await supabase
-          .from("certificates")
-          .select("*")
-          .limit(4);
-        
-        if (data && data.length > 0) {
-          setCerts(data);
-        } else {
-          // If no DB table, enrich initialCerts with Supabase storage URLs
-          const enrichedCerts = await Promise.all(initialCerts.map(async (cert) => {
-            const { data: urlData } = supabase.storage
-              .from("certifications")
-              .getPublicUrl(cert.fileName);
-            return { ...cert, file_url: urlData.publicUrl };
-          }));
-          setCerts(enrichedCerts);
+        const res = await fetch("/api/portfolio-data");
+        if (res.ok) {
+          const json = await res.json();
+          if (json.data?.certifications && json.data.certifications.length > 0) {
+            setCerts(json.data.certifications);
+            return;
+          }
         }
+        setCerts(initialCerts);
       } catch (err) {
         console.error("Error fetching homepage certs:", err);
+        setCerts(initialCerts);
       }
     }
     fetchCerts();
-  }, []);
+  }, [data]);
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -81,67 +76,116 @@ export default function Certifications() {
       scrollRef.current.scrollTo({ left: scrollTo, behavior: "smooth" });
     }
   };
+
   return (
-    <section id="certifications" className="relative z-10 py-16 md:py-24">
+    <section id="certifications" className="relative z-10 pt-16 md:pt-20 pb-0 scroll-mt-24 md:scroll-mt-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-10 md:mb-12"
         >
-          <p className="text-blue-400 text-xs sm:text-sm font-semibold tracking-[0.3em] uppercase mb-3">
+          <p className="text-[#C7A46A] text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase mb-2.5 font-heading">
             — MY CREDENTIALS —
           </p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white">Certifications</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#F4F0E8] font-heading tracking-tight">
+            Certifications
+          </h2>
         </motion.div>
 
-        {/* Horizontally Scrollable Carousel */}
-        <div className="relative group/carousel">
+        {/* Mobile View: Vertical Stack */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:hidden">
+          {certs.map((cert, i) => (
+            <motion.div
+              key={cert.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              viewport={{ once: true }}
+              className="bg-[#151517] rounded-2xl p-5 sm:p-7 group w-full flex flex-col justify-between border border-[#302D28] hover:border-[#C7A46A]/40 transition-all duration-300 shadow-xl"
+            >
+              <div className="flex flex-col flex-grow">
+                {/* Badge Icon */}
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-[#202023] border border-[#302D28] text-[#C7A46A] shadow-inner p-3 shrink-0">
+                  <BadgeCheck size={24} />
+                </div>
+
+                {/* Title & Issuer */}
+                <h3 className="text-[#F4F0E8] font-bold text-base sm:text-lg mb-1 font-heading leading-snug">
+                  {cert.title}
+                </h3>
+                <p className="text-xs sm:text-sm font-medium mb-3 text-[#C7A46A]">
+                  {cert.issuer}
+                </p>
+
+                {/* Description */}
+                <p className="text-[#A7A198] text-xs sm:text-sm leading-relaxed mb-6 flex-grow">
+                  {cert.description}
+                </p>
+              </div>
+
+              {/* Link / Open Modal Button */}
+              <div className="pt-4 border-t border-[#302D28] mt-auto">
+                <button 
+                  id={`view-cert-mobile-${i}`}
+                  type="button"
+                  onClick={() => setSelectedCert(cert as any)}
+                  className="flex items-center gap-2 text-xs sm:text-sm text-[#A7A198] hover:text-[#C7A46A] font-medium transition-colors cursor-pointer text-left group/btn w-full"
+                >
+                  <ExternalLink size={14} className="group-hover/btn:scale-110 transition-transform" />
+                  <span>View Certificate</span>
+                </button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Desktop View: Horizontal Carousel */}
+        <div className="hidden md:block relative group/carousel">
           <div 
             ref={scrollRef}
-            className="flex gap-4 md:gap-6 overflow-x-auto scroll-smooth pb-8 md:px-1 items-stretch [&::-webkit-scrollbar]:hidden ms-auto" 
+            className="flex gap-4 md:gap-6 overflow-x-auto scroll-smooth pb-6 md:px-1 items-stretch [&::-webkit-scrollbar]:hidden" 
             style={{ scrollbarWidth: 'none' }}
           >
             {certs.map((cert, i) => (
               <motion.div
                 key={cert.title}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.15 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="glass-card rounded-2xl md:rounded-3xl p-8 sm:p-10 group flex-shrink-0 w-[95%] sm:w-96 scroll-snap-align-start flex flex-col border border-white/5 mx-auto md:mx-0"
+                className="bg-[#151517] rounded-2xl md:rounded-3xl p-7 sm:p-8 group flex-shrink-0 w-[360px] flex flex-col justify-between border border-[#302D28] hover:border-[#C7A46A]/40 transition-all duration-300 shadow-xl"
               >
-                {/* Badge Icon */}
-                <div
-                  className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-lg"
-                  style={{ backgroundColor: cert.bg }}
-                >
-                  <BadgeCheck size={28} style={{ color: cert.color }} />
+                <div>
+                  {/* Badge Icon */}
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 bg-[#202023] border border-[#302D28] text-[#C7A46A] shadow-inner p-3">
+                    <BadgeCheck size={24} />
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-[#F4F0E8] font-bold text-base sm:text-lg mb-1 font-heading">{cert.title}</h3>
+                  <p className="text-xs sm:text-sm font-medium mb-3.5 text-[#C7A46A]">
+                    {cert.issuer}
+                  </p>
+
+                  {/* Description */}
+                  <p className="text-[#A7A198] text-xs sm:text-sm leading-relaxed mb-6">{cert.description}</p>
                 </div>
 
-                {/* Title */}
-                <h3 className="text-white font-bold text-lg sm:text-xl mb-1">{cert.title}</h3>
-                <p className="text-sm font-semibold mb-4" style={{ color: cert.color }}>
-                  {cert.issuer}
-                </p>
-
-                {/* Description */}
-                <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-6">{cert.description}</p>
-
-                {/* Link */}
-                <div className="mt-auto pt-6 border-t border-white/5">
-                  <a 
-                    href={(cert as any).file_url || "#"} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 group-hover:text-blue-400 font-medium transition-colors cursor-pointer"
+                {/* Link / Open Modal Button */}
+                <div className="pt-4 border-t border-[#302D28]">
+                  <button 
+                    id={`view-cert-${i}`}
+                    type="button"
+                    onClick={() => setSelectedCert(cert as any)}
+                    className="flex items-center gap-2 text-xs sm:text-sm text-[#A7A198] hover:text-[#C7A46A] font-medium transition-colors cursor-pointer text-left group/btn w-full"
                   >
-                    <ExternalLink size={14} />
+                    <ExternalLink size={14} className="group-hover/btn:scale-110 transition-transform" />
                     <span>View Certificate</span>
-                  </a>
+                  </button>
                 </div>
               </motion.div>
             ))}
@@ -150,21 +194,28 @@ export default function Certifications() {
           {/* Navigation Arrows */}
           <button
             onClick={() => scroll("left")}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 w-14 h-14 rounded-full bg-slate-900/60 border border-white/10 text-white flex items-center justify-center backdrop-blur-md opacity-0 group-hover/carousel:opacity-100 group-hover/carousel:translate-x-0 transition-all duration-500 z-30 hover:bg-blue-500 hover:text-white hover:border-blue-400 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hidden sm:flex"
-            aria-label="Previous"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-11 h-11 rounded-full bg-[#202023] border border-[#302D28] text-[#A7A198] flex items-center justify-center backdrop-blur-md opacity-0 group-hover/carousel:opacity-100 transition-all duration-200 z-30 hover:bg-[#C7A46A] hover:text-[#191919] hover:border-[#C7A46A] hidden sm:flex shadow-2xl"
+            aria-label="Previous certificates"
           >
-            <ChevronLeft size={28} />
+            <ChevronLeft size={22} />
           </button>
           
           <button
             onClick={() => scroll("right")}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 w-14 h-14 rounded-full bg-slate-900/60 border border-white/10 text-white flex items-center justify-center backdrop-blur-md opacity-0 group-hover/carousel:opacity-100 group-hover/carousel:translate-x-0 transition-all duration-500 z-30 hover:bg-blue-500 hover:text-white hover:border-blue-400 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] flex"
-            aria-label="Next"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-11 h-11 rounded-full bg-[#202023] border border-[#302D28] text-[#A7A198] flex items-center justify-center backdrop-blur-md opacity-0 group-hover/carousel:opacity-100 transition-all duration-200 z-30 hover:bg-[#C7A46A] hover:text-[#191919] hover:border-[#C7A46A] flex shadow-2xl"
+            aria-label="Next certificates"
           >
-            <ChevronRight size={28} />
+            <ChevronRight size={22} />
           </button>
         </div>
       </div>
+
+      {/* Certificate Modal Lightbox */}
+      <CertificateModal
+        cert={selectedCert}
+        onClose={() => setSelectedCert(null)}
+      />
+
       <SectionDivider />
     </section>
   );

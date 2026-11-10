@@ -4,191 +4,156 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Download, FolderOpen, MapPin, Linkedin, Instagram, Github, Mail } from "lucide-react";
 import Image from "next/image";
-import { supabase } from "@/lib/supabase";
+import type { ResumeData } from "@/lib/portfolio-data";
 
-export default function Hero() {
-  const [resumeUrl, setResumeUrl] = useState("/resume.pdf");
+interface HeroProps {
+  resume?: ResumeData | string;
+}
+
+export default function Hero({ resume }: HeroProps = {}) {
+  const initialUrl =
+    typeof resume === "string"
+      ? resume
+      : resume?.download_url || resume?.url || "";
+
+  const [resumeUrl, setResumeUrl] = useState(initialUrl || "/resume.pdf");
 
   useEffect(() => {
-    if (supabase && supabase.storage) {
-      try {
-        const { data } = supabase.storage.from("resume").getPublicUrl("Amar_Resume.pdf");
-        if (data?.publicUrl) {
-          setResumeUrl(data.publicUrl);
-        }
-      } catch (err) {
-        console.error("Error getting resume URL:", err);
+    if (resume) {
+      const target = typeof resume === "string" ? resume : (resume.download_url || resume.url);
+      if (target) {
+        setResumeUrl(target);
+        return;
       }
     }
-  }, []);
+
+    // Client-side fallback if resume prop is not passed directly
+    fetch("/api/portfolio-data")
+      .then((res) => res.json())
+      .then((json) => {
+        if (json?.data?.resume) {
+          const r = json.data.resume;
+          const target = typeof r === "string" ? r : (r.download_url || r.url);
+          if (target) {
+            setResumeUrl(target);
+          }
+        }
+      })
+      .catch(() => {});
+  }, [resume]);
 
   const scrollToProjects = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const scrollToContact = () => {
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section
       id="home"
-      className="relative min-h-[70vh] md:min-h-screen flex items-center z-10 pt-20 md:pt-16 pb-12 md:pb-0 overflow-hidden"
+      className="relative min-h-[85vh] lg:min-h-screen flex items-center z-10 pt-20 sm:pt-24 pb-16 lg:py-0 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="flex flex-col lg:grid lg:grid-cols-2 items-center gap-8 md:gap-12 py-4 md:py-8 min-h-fit md:min-h-[calc(100vh-64px)]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full translate-y-0 lg:translate-y-8">
+        <div className="flex flex-col-reverse lg:grid lg:grid-cols-12 items-center gap-8 lg:gap-6 py-6 min-h-fit lg:min-h-[calc(100vh-80px)]">
 
-          {/* Right — Image (Moved above text for mobile) */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative flex justify-center items-center h-[300px] sm:h-[400px] md:h-[650px] lg:h-[800px] order-first lg:order-last w-full"
-          >
-            {/* Circular glow - scaled down for mobile */}
-            <div
-              className="absolute"
-              style={{
-                width: "min(var(--glow-size), 85vw)",
-                height: "min(var(--glow-size), 85vw)",
-                borderRadius: "50%",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                boxShadow:
-                  "0 0 0 2px rgba(59,130,246,0.6), 0 0 40px 10px rgba(59,130,246,0.4), 0 0 80px 20px rgba(29,78,216,0.25)",
-              }}
-            />
-            <style jsx>{`
-              div {
-                --glow-size: 240px;
-              }
-              @media (min-width: 768px) {
-                div {
-                  --glow-size: 380px;
-                }
-              }
-              @media (min-width: 1024px) {
-                div {
-                  --glow-size: 550px;
-                }
-              }
-            `}</style>
-
-            {/* Image container - scaled down for mobile */}
-            <div
-              className="relative z-10 w-[220px] h-[280px] sm:w-[260px] sm:h-[330px] md:w-[450px] md:h-[580px] lg:w-[550px] lg:h-[710px]"
-            >
-              <Image
-                src="/photo.png"
-                alt="Amarnath B"
-                fill
-                className="object-cover object-center"
-                style={{
-                  filter:
-                    "drop-shadow(0 0 15px rgba(59,130,246,0.3))",
-                }}
-                priority
-              />
-              {/* Line under photo */}
-              <div
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[150%] md:w-[500%] h-[2px]"
-                style={{
-                  background: "linear-gradient(to right, transparent, rgba(59,130,246,0.8), transparent)",
-                  boxShadow: "0 0 8px rgba(59,130,246,0.5)",
-                }}
-              />
-            </div>
-          </motion.div>
-
-          {/* Left Content */}
-          <div className="space-y-4 md:space-y-6 self-center text-center lg:text-left w-full">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="inline-flex items-center gap-2 bg-blue-900/30 border border-blue-500/30 rounded-full px-3 md:px-4 py-1.5 md:py-2 text-xs md:text-sm text-gray-300"
-            >
-              <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-blue-400 animate-pulse" />
-              Tech Enthusiast & Coder
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
-            >
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                <span className="text-white">Amarnath </span>
-                <span className="text-blue-400 glow-text">B</span>
-              </h1>
-            </motion.div>
-
+          {/* Left Content (7 columns on desktop) */}
+          <div className="lg:col-span-7 flex flex-col gap-5 text-center lg:text-left w-full min-w-0">
+            {/* Status Badge */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="text-lg md:text-2xl font-semibold text-blue-400"
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="inline-flex items-center gap-2.5 bg-[#151517]/80 border border-[#302D28]/60 rounded-full px-4 py-2 text-xs font-medium text-[#A7A198] w-fit mx-auto lg:mx-0"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C7A46A] shadow-[0_0_6px_#C7A46A]" />
+              Tech Enthusiast & Coder
+            </motion.div>
+
+            {/* Name Heading */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-[4rem] font-extrabold tracking-tight font-heading leading-[1.08] break-words">
+                <span className="text-[#F4F0E8]">Amarnath </span>
+                <span className="text-[#C7A46A] gold-glow">B</span>
+              </h1>
+            </motion.div>
+
+            {/* Tagline */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="text-base sm:text-xl lg:text-[1.35rem] font-medium text-[#C7A46A]/90 tracking-normal"
             >
               Turning Ideas into Impactful Solutions
             </motion.div>
 
+            {/* Bio Paragraph */}
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="text-gray-400 text-sm md:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0"
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="text-[#A7A198] text-sm sm:text-[0.95rem] lg:text-base leading-[1.7] max-w-[520px] mx-auto lg:mx-0 font-normal"
             >
               I build web applications, real-time systems, and digital solutions using modern AI-powered development tools. I am passionate about technology and creating intuitive user experiences.
             </motion.p>
 
+            {/* Action Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 pt-2 md:pt-0"
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 pt-1"
             >
               <motion.a
                 href={resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 download="Amarnath_B_Resume.pdf"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center justify-center gap-2 px-5 py-3.5 md:py-3 border border-transparent bg-blue-600 hover:bg-blue-500 rounded-xl text-sm font-semibold text-white transition-all duration-200"
+                whileHover={{ scale: 1.02, backgroundColor: "#D8BC8A" }}
+                whileTap={{ scale: 0.98 }}
+                className="flex items-center justify-center gap-2.5 px-6 py-3 bg-[#C7A46A] text-[#191919] rounded-xl text-sm font-semibold shadow-lg shadow-[#C7A46A]/10 transition-all duration-200"
               >
-                <Download size={18} />
+                <Download size={17} />
                 Download Resume
               </motion.a>
 
               <div className="flex gap-3">
                 <motion.button
                   onClick={scrollToProjects}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex-1 flex items-center justify-center gap-2 px-5 py-3.5 md:py-3 border border-blue-500/50 rounded-xl text-sm font-semibold text-gray-300 hover:text-white hover:bg-blue-900/20 transition-all duration-200"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3 bg-[#151517] border border-[#302D28] hover:border-[#C7A46A]/40 hover:text-[#C7A46A] rounded-xl text-sm font-semibold text-[#F4F0E8] transition-all duration-200"
                 >
-                  <FolderOpen size={18} />
+                  <FolderOpen size={17} />
                   Projects
                 </motion.button>
 
-                <motion.a
-                  href="https://mail.google.com/mail/?view=cm&fs=1&to=amarmicrosoft2021@gmail.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex-1 flex items-center justify-center gap-2 px-5 py-3.5 md:py-3 border border-transparent bg-indigo-600 hover:bg-indigo-500 rounded-xl text-sm font-semibold text-white transition-all duration-200"
+                <motion.button
+                  onClick={scrollToContact}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3 bg-[#151517] border border-[#302D28] hover:border-[#C7A46A]/40 hover:text-[#C7A46A] rounded-xl text-sm font-semibold text-[#F4F0E8] transition-all duration-200"
                 >
-                  <Mail size={18} />
+                  <Mail size={17} />
                   Contact
-                </motion.a>
+                </motion.button>
               </div>
             </motion.div>
 
+            {/* Social Follow Links */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="flex items-center justify-center lg:justify-start gap-4 pt-4 md:pt-2"
+              transition={{ duration: 0.5, delay: 0.7 }}
+              className="flex items-center justify-center lg:justify-start gap-3 pt-2"
             >
-              <span className="hidden sm:inline text-gray-500 text-sm">Follow Me</span>
+              <span className="hidden sm:inline text-[#A7A198]/70 text-[11px] uppercase tracking-widest font-semibold mr-1">Follow Me</span>
               {[
                 { icon: MapPin, href: "#", label: "Location" },
                 { icon: Linkedin, href: "https://www.linkedin.com/in/amarnath2007", label: "LinkedIn" },
@@ -198,11 +163,12 @@ export default function Hero() {
                 <motion.a
                   key={label}
                   href={href}
-                  target="_blank"
+                  target={href.startsWith("#") ? undefined : "_blank"}
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.2, y: -2 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="w-10 h-10 md:w-9 md:h-9 flex items-center justify-center rounded-full bg-blue-900/20 border border-blue-800/40 text-gray-400 hover:text-blue-400 hover:border-blue-400 transition-all"
+                  whileHover={{ scale: 1.08, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-9 h-9 flex items-center justify-center rounded-lg bg-[#151517]/70 border border-[#302D28]/60 text-[#A7A198] hover:text-[#C7A46A] hover:border-[#C7A46A]/40 transition-all duration-200"
+                  aria-label={label}
                 >
                   <Icon size={16} />
                 </motion.a>
@@ -210,10 +176,43 @@ export default function Hero() {
             </motion.div>
           </div>
 
+          {/* Right — Profile Photo (5 columns on desktop, naturally blended) */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="lg:col-span-5 relative flex justify-center items-center w-full"
+          >
+            {/* Very subtle warm ambient glow behind portrait */}
+            <div className="absolute -inset-8 bg-gradient-to-t from-transparent via-[#C7A46A]/[0.03] to-transparent rounded-full blur-3xl -z-10" />
+
+            {/* Naturally blended portrait — zoomed out to show full upper body, shoulders, and suit */}
+            <div
+              className="relative w-[240px] xs:w-[270px] sm:w-[330px] lg:w-[390px] xl:w-[420px] aspect-[2/3]"
+              style={{
+                maskImage:
+                  'linear-gradient(to bottom, black 0%, black 56%, rgba(0,0,0,0.85) 68%, rgba(0,0,0,0.35) 78%, transparent 88%)',
+                WebkitMaskImage:
+                  'linear-gradient(to bottom, black 0%, black 56%, rgba(0,0,0,0.85) 68%, rgba(0,0,0,0.35) 78%, transparent 88%)',
+              }}
+            >
+              <Image
+                src="/photo.png"
+                alt="Amarnath B"
+                fill
+                className="object-contain object-top select-none"
+                priority
+              />
+            </div>
+
+            {/* Minimal "Developer" label */}
+            <div className="absolute top-12 xs:top-16 sm:top-20 lg:top-24 right-[4%] sm:right-[4%] lg:right-[2%] px-3 py-1 rounded-full bg-[#151517]/85 backdrop-blur-md border border-[#302D28]/70 text-[10px] uppercase tracking-widest text-[#C7A46A] font-semibold shadow-md">
+              Developer
+            </div>
+          </motion.div>
+
         </div>
       </div>
     </section>
-
-
   );
 }

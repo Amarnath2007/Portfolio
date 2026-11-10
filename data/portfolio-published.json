@@ -1,0 +1,563 @@
+{
+  "skills": [
+    {
+      "id": "skill-cat-1",
+      "num": "01",
+      "title": "Programming",
+      "icon": "Code2",
+      "skills": [
+        "C",
+        "C++",
+        "Python",
+        "Java"
+      ]
+    },
+    {
+      "id": "skill-cat-2",
+      "num": "02",
+      "title": "Frontend",
+      "icon": "Layout",
+      "skills": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React",
+        "Next.js",
+        "Tailwind CSS"
+      ]
+    },
+    {
+      "id": "skill-cat-3",
+      "num": "03",
+      "title": "Backend & Database",
+      "icon": "Database",
+      "skills": [
+        "Node.js",
+        "SQL",
+        "Supabase",
+        "File Handling"
+      ]
+    },
+    {
+      "id": "skill-cat-4",
+      "num": "04",
+      "title": "Application Development",
+      "icon": "Smartphone",
+      "skills": [
+        "Flutter",
+        "Kotlin",
+        "Java"
+      ]
+    },
+    {
+      "id": "skill-cat-5",
+      "num": "05",
+      "title": "Core Competencies",
+      "icon": "Brain",
+      "skills": [
+        "Problem Solving",
+        "Data Structures",
+        "AI Tools",
+        "Debugging",
+        "Designing",
+        "Research"
+      ]
+    },
+    {
+      "id": "skill-cat-6",
+      "num": "06",
+      "title": "AI Tools",
+      "icon": "Sparkles",
+      "skills": [
+        "Claude",
+        "ChatGPT",
+        "Codex",
+        "Gamma",
+        "ElevenLabs",
+        "Antigravity",
+        "NotebookLM",
+        "Napkin AI",
+        "Canva",
+        "Cursor",
+        "Replit",
+        "Lovable"
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "id": "ach-1",
+      "category": "intercollege",
+      "title": "Inter-College Wins",
+      "event_name": "Various Institutions",
+      "description": "Successfully competed and secured top positions in symposiums and technical fests held at various reputed colleges.",
+      "position_award": "🏆 5+ Wins",
+      "date": "2024 - 2026",
+      "icon": "Trophy",
+      "image": "",
+      "proof_document": "",
+      "entries": [
+        {
+          "id": "entry-1791887213526",
+          "title": "Bug Busters",
+          "event_name": "HI CAS",
+          "position_award": "1st Prize",
+          "date": "3rd March 2026",
+          "description": "It is a competition where participants detect, debug, and fix software errors, organized by the Department of Data Science & Analytics, HI CAS",
+          "certificate_url": "https://drive.google.com/file/d/1sRKjDWIxwSrPnJ4rAg6TmmLAS5K7dhDg/view?usp=sharing",
+          "image": ""
+        },
+        {
+          "id": "entry-1791879438955",
+          "title": "Case Study Competition",
+          "event_name": "SNS X E-CELL IIT Bombay",
+          "position_award": "3rd Prize",
+          "date": "4th Sept 2026",
+          "description": "A case study competition challenges teams to solve real-world business problems under tight deadlines. Participants analyze complex scenarios, develop data-driven strategies, and present solutions to expert judges, showcasing their critical thinking, teamwork, and presentation skills.",
+          "certificate_url": "https://drive.google.com/file/d/1dH82C4QmWLdAMipCajdvb-nhW5DSupLZ/view?usp=sharing",
+          "image": ""
+        },
+        {
+          "id": "entry-1791887413618",
+          "title": "Debugging-Techno Fest",
+          "event_name": "Sri Ramakrishna College of Arts & Science",
+          "position_award": "1st Prize",
+          "date": "5th December 2026",
+          "description": "Tests our debugging skills against the clock, organized by the Department of Information Technology, SR CAS",
+          "certificate_url": "https://drive.google.com/file/d/1pxfpXJo0ttIffcpDlrXRToKSt26Pc8F2/view?usp=sharing",
+          "image": ""
+        },
+        {
+          "id": "entry-1791879107633",
+          "title": "IPL Aucion",
+          "event_name": "SNS X E-CELL IIT Bombay",
+          "position_award": "3rd Prize",
+          "date": "4th Sept 2026",
+          "description": "The IPL Auction is a fast-paced sports simulation where teams use virtual budgets to bid on cricket players. It builds essential business skills like strategic budgeting, real-time negotiation, and data analysis under pressure.",
+          "certificate_url": "https://drive.google.com/file/d/1IdlpeM9ZEX70tfxu0eC8eEe5P-eyw7Kx/view?usp=sharing",
+          "image": ""
+        },
+        {
+          "id": "entry-1791887610827",
+          "title": "Debugging- Spyder",
+          "event_name": "HI CAS",
+          "position_award": "1st Prize",
+          "date": "9th March 2026",
+          "description": "Tests the debugging skills in programming languages like C, C++, Python and Java, organized by the Department of Information Technology ",
+          "certificate_url": "https://drive.google.com/file/d/12YPhyDmcTUx-6_qQtg0wPCExnEzsazMM/view?usp=sharing",
+          "image": ""
+        },
+        {
+          "id": "entry-1791887818617",
+          "title": "Prompt Battle",
+          "event_name": "PSG iTech",
+          "position_award": "4th Prize",
+          "date": "21st Feb 2026",
+          "description": "A Prompt Battle is a live, multiple-round competition where creators race to generate the images , document and design a website using efficient prompting technique",
+          "certificate_url": "https://drive.google.com/file/d/1iUwnvL9BR9dwCY6-j0ukMyKv_tL2xUgn/view?usp=sharing",
+          "image": ""
+        },
+        {
+          "id": "entry-1791887988051",
+          "title": "Debugging- MIRARI'26",
+          "event_name": "Dr. SNS Rajalakshmi College of Arts & Science",
+          "position_award": "3rd Prize",
+          "date": "28th Feb 2026",
+          "description": "It is a two-round technical competition showcasing computer science skills in conceptual quizzes and live code debugging.",
+          "certificate_url": "https://drive.google.com/file/d/1DtMVJUbjNwDAcKkXEQ-QtGpnreTFnP75/view?usp=sharing",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "id": "ach-2",
+      "category": "events",
+      "title": "College Wins",
+      "event_name": "PSG CAS (Internal)",
+      "description": "Consistent performance in intra-college events, spanning debugging, logic-building, and technical paper presentations.",
+      "position_award": "🏆 5+ Wins",
+      "date": "2024 - 2026",
+      "icon": "Award",
+      "image": "",
+      "proof_document": "",
+      "entries": [
+        {
+          "id": "entry-1791880249227",
+          "title": "Byte Quest",
+          "event_name": "PSG CAS",
+          "position_award": "2nd Prize",
+          "date": "16th Sept 2025",
+          "description": "A fast-paced race to find, diagnose, and fix bugs in broken code before time runs out.",
+          "certificate_url": "https://drive.google.com/file/d/18cCeKwn7NeNXY8KTPZEGjPDJxkuowlf3/view?usp=sharing",
+          "image": ""
+        },
+        {
+          "id": "entry-1791880400546",
+          "title": "Code Quest",
+          "event_name": "PSG CAS",
+          "position_award": "1st Prize",
+          "date": "10th Sept 2026",
+          "description": "Showcase our programming skills, solve challenging logic problems, and race against the clock to win.",
+          "certificate_url": "https://drive.google.com/file/d/1uDfc-B5Ix_Yd_XyTHCrW9hip7NavZ-Vq/view?usp=sharing",
+          "image": ""
+        },
+        {
+          "id": "entry-1791880505011",
+          "title": "Code Relay",
+          "event_name": "PSG CAS",
+          "position_award": "1st Prize",
+          "date": "6th Jan 2026",
+          "description": "A team coding competition where participants take turns writing and debugging the same codebase.",
+          "certificate_url": "https://drive.google.com/file/d/1xy9cMowL3JKW07YiAk4S2-nMy_QegCf0/view?usp=sharing",
+          "image": ""
+        },
+        {
+          "id": "entry-1791880722214",
+          "title": "Netronics- Idea Pitching",
+          "event_name": "PSG CAS",
+          "position_award": "1st Prize",
+          "date": "26th Aug 2025",
+          "description": "A concise, high-impact hook explaining the target problem, the core solution, and the unique value delivered.",
+          "certificate_url": "https://drive.google.com/file/d/1lhSVV468rScFyMgLXs7X6-gojy-jGKJ7/view?usp=sharing",
+          "image": ""
+        },
+        {
+          "id": "entry-1791880795509",
+          "title": "Pitch Fest",
+          "event_name": "PSG CAS",
+          "position_award": "2nd Prize",
+          "date": "5th Feb 2026",
+          "description": "A crisp, persuasive presentation designed to sell your business concept to investors in minutes.",
+          "certificate_url": "https://drive.google.com/file/d/1dewTr0ia8NtQww043-A8zN_Gkoi6AgRY/view?usp=sharing",
+          "image": ""
+        },
+        {
+          "id": "entry-1791880904467",
+          "title": "Prompt Engineering",
+          "event_name": "PSG CAS",
+          "position_award": "1st Prize",
+          "date": "6th Jan 2026",
+          "description": "Showcasing our AI creativity in this fast-paced competition to build the ultimate prompts",
+          "certificate_url": "https://drive.google.com/file/d/1EP6LTm4tMDq6a3wV5h-xUJZ1aa-uEwyi/view?usp=sharing",
+          "image": ""
+        },
+        {
+          "id": "entry-1791881015578",
+          "title": "DigiBytes",
+          "event_name": "PSG CAS",
+          "position_award": "1st Prize",
+          "date": "8th Jan 2026",
+          "description": "Showcasing my technical knowledge and coding skills in the ultimate trivia and programming challenge!",
+          "certificate_url": "https://drive.google.com/file/d/1xNQ9tXZmCczCwdbfWIVTIs2iwHXX4aPY/view?usp=sharing",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "id": "ach-3",
+      "category": "hackathon",
+      "title": "Hackathon Prizes",
+      "event_name": "Innovation & Coding",
+      "description": "Building functional prototypes and solving real-world problems under pressure.",
+      "position_award": "",
+      "date": "2025 - 2026",
+      "icon": "Zap",
+      "image": "",
+      "proof_document": "",
+      "entries": [
+        {
+          "id": "entry-1791881976465",
+          "title": "HackVerse",
+          "event_name": "PSG CAS",
+          "position_award": "2nd Prize",
+          "date": "11-12th Feb 2026",
+          "description": "It is an intensive, two-day event where we build functioning software prototypes, solving the given problem challenges.",
+          "certificate_url": "https://drive.google.com/file/d/15dqjjWIIrt2viz3QfkkgRJhCljyoZxn7/view?usp=sharing",
+          "image": ""
+        },
+        {
+          "id": "entry-1791882524804",
+          "title": "Hackathon 10.0",
+          "event_name": "SRM Institute of Science and Technology, kattankulathur",
+          "position_award": "Finalists - Top 10",
+          "date": "17-18th April 2026",
+          "description": "It is an intensive 36-hour innovation challenge where shortlisted teams collaborate continuously to transform ideas into working prototypes, demonstrating technical expertise, creativity, teamwork, and problem-solving under pressure. (Over 150 teams participated)",
+          "certificate_url": "https://drive.google.com/file/d/1vsk0sgvYMIi8KjiwzpSeeuWyJpgT8REt/view?usp=sharing",
+          "image": ""
+        },
+        {
+          "id": "entry-1791885755170",
+          "title": "Botathon 2K26",
+          "event_name": "Erode Sengunthar Engineering College",
+          "position_award": "Selected in Top 15",
+          "date": "1st Oct 2026",
+          "description": " It is an high-intensity 12-hour hackathon focused on AI, robotics, and open innovation. Developed a software solution within a tight timeframe and presented the project to industry experts, including leaders from Microsoft.",
+          "certificate_url": "https://drive.google.com/file/d/1EJyKAyfcBIUqhPBd5B3lQt9sWPTnaGuR/view?usp=sharing",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "id": "ach-4",
+      "category": "participations",
+      "title": "Event Participations",
+      "event_name": "Inside & Outside College",
+      "description": "Active participation across technical symposiums, workshops, coding contests, and conferences spanning multiple institutions.",
+      "position_award": "📜 Participations",
+      "date": "2024 - 2026",
+      "icon": "Award",
+      "image": "",
+      "proof_document": "",
+      "entries": [
+        {
+          "id": "entry-1791888780422",
+          "title": "Startup Pitching Competition- Regional AI Summit 2.0",
+          "event_name": "Sri Ramakrishna Institute of Technology",
+          "position_award": "Participant",
+          "date": "24-26 Sept 2026",
+          "description": "A three-day startup pitching competition featuring direct engagement with investors and industry experts. Presented our startup vision, received investor interest, and evaluated funding opportunities while prioritizing long-term growth and strategic equity ownership.",
+          "certificate_url": "https://drive.google.com/file/d/1JVM0ZV6Z1L2TocCERF612XmgkF4-dKCu/view?usp=sharing",
+          "image": ""
+        },
+        {
+          "id": "entry-1791811915444",
+          "title": "Startup Pitching Competition",
+          "event_name": "Lead College of Management, Palakkad",
+          "position_award": "Top 5 ideas",
+          "date": "9-10th Sept 2026",
+          "description": "What an Idea Sirji! program is a two-day residential entrepreneurship and idea-pitching competition organized by the LEAD Business Incubator (LEAD-BI) at LEAD College of Management in Palakkad, Kerala",
+          "certificate_url": "https://drive.google.com/file/d/1PrjaeFjg5h_F7X6WVIyLSZxei2kRC4vG/view?usp=sharing",
+          "image": ""
+        },
+        {
+          "id": "entry-1793212057169",
+          "title": "Bug Hunt",
+          "event_name": "Rajalakshmi Institute of Technology, Chennai",
+          "position_award": "Participant",
+          "date": "16th April 2026",
+          "description": "It is a timed technical event where participants find, analyze, and fix software defects, syntax errors, or logic flaws in pre-existing code",
+          "certificate_url": "https://drive.google.com/file/d/1bxOe2wON_IjOVVAd6od_vCbJlP80Tpzv/view?usp=sharing",
+          "image": ""
+        },
+        {
+          "id": "entry-1793212850267",
+          "title": "Gateway'26",
+          "event_name": "PSG CAS",
+          "position_award": "Volunteer",
+          "date": "25th Feb 2026",
+          "description": "Volunteered at an inter-college event, where I was responsible for organizing activities, managing student participants, and providing guidance.",
+          "certificate_url": "https://drive.google.com/file/d/1-uLzZmdWU2_hh_z193uDi_69w_rT3hQQ/view?usp=sharing",
+          "image": ""
+        },
+        {
+          "id": "entry-1793212226883",
+          "title": "Young Innovators Ideathon",
+          "event_name": "RVS College of Arts & Science",
+          "position_award": "Top 5 ideas",
+          "date": "8th Jan 2026",
+          "description": "Pitched the project to a panel of expert judges and collaborated with our team to conceptualize, develop, and present a viable, technology-driven solution aimed at solving real-world challenges.",
+          "certificate_url": "https://drive.google.com/file/d/1psKUwtcmF5RGpGxQQouG4sqo9clPgN94/view?usp=sharing",
+          "image": ""
+        },
+        {
+          "id": "entry-1793212593432",
+          "title": "Smart India Hackathon- Internal",
+          "event_name": "PSG CAS",
+          "position_award": "Participant",
+          "date": "23rd Sept 2025",
+          "description": "Collaborated with a team to develop a solution for a real-world, government-issued problem statement, successfully presenting the final product to a panel of experts",
+          "certificate_url": "https://drive.google.com/file/d/1viNIRhE4cIFLWhhaPbn5X5AoGgVwG58c/view?usp=sharing",
+          "image": ""
+        }
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "id": "cert-1792779675568",
+      "title": "HDCA Programming",
+      "issuer": "CSC (Computer Software College)",
+      "description": "Comprehensive programming certification covering hardware and software fundamentals alongside core coding skills.",
+      "issue_date": "2023",
+      "file_url": "https://drive.google.com/file/d/1a3G7_mwptM4aMlqgiaQSO8g0T0QMmB8r/view?usp=sharing",
+      "original_link": ""
+    },
+    {
+      "id": "cert-3",
+      "title": "SEO for WordPress",
+      "issuer": "Udemy",
+      "description": "Completed training on search engine optimization techniques, web content strategy, and WordPress website management.",
+      "issue_date": "2025",
+      "file_url": "https://drive.google.com/file/d/11DZBzAzPvYjfhd-YX-ddxIjrhGdeSBxv/view?usp=sharing",
+      "original_link": ""
+    },
+    {
+      "id": "cert-4",
+      "title": "AI Tools Workshop",
+      "issuer": "Be10x",
+      "description": "Successfully completed an intensive workshop on AI tools, focusing on productivity enhancement and advanced generative AI workflows.",
+      "issue_date": "2025",
+      "file_url": "https://drive.google.com/file/d/1kaArh9EgD1OpNx5W1f_3iGDL_mf1XufI/view?usp=sharing",
+      "original_link": ""
+    },
+    {
+      "id": "cert-2",
+      "title": "Introduction to C",
+      "issuer": "NPTEL",
+      "description": "Officially certified by NPTEL, India's premier e-learning platform backed by IITs and IISc, covering C programming fundamentals.",
+      "issue_date": "2025",
+      "file_url": "https://drive.google.com/file/d/117aInVhLOp1GUkeLT2ZJAw1fm8TMQMip/view?usp=sharing",
+      "original_link": ""
+    },
+    {
+      "id": "cert-1793211631283",
+      "title": "AI Automation Tools",
+      "issuer": "PSG CAS",
+      "description": "Certified in AI automation basics using UiPath. Skilled in building software robots, designing smart workflows, and integrating AI to eliminate repetitive tasks.",
+      "issue_date": "2025",
+      "file_url": "https://drive.google.com/file/d/1q2pLcE4FI67o2Xe044-XKXRubyE5bb4F/view?usp=sharing",
+      "original_link": ""
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj-1",
+      "letter": "T",
+      "title": "Tunic Music",
+      "subtitle": "Mobile App · 2026",
+      "description": "A premium music streaming application featuring a library of 500+ songs with a Spotify-inspired user experience.",
+      "highlights": [
+        "Built with Flutter and Kotlin",
+        "Integrated with Cloudinary for seamless media hosting",
+        "Advanced playback controls and playlist management"
+      ],
+      "tags": [
+        "Flutter",
+        "Kotlin",
+        "Cloudinary"
+      ],
+      "download": "https://ydfjuomyveiwbxejkjvh.supabase.co/storage/v1/object/sign/Apps/Tunic_music_by_Amar.apk?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV81N2RmMTE0ZC1iNTk5LTRhN2ItYjk1ZS02ZDJhYjA0NWZiMTIiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJBcHBzL1R1bmljX211c2ljX2J5X0FtYXIuYXBrIiwiaWF0IjoxNzc4ODIwNzczLCJleHAiOjE5MzY1MDA3NzN9.BQpxvEi3oVdrAoFjPy-NuKtezOKsABWQRDD8Uzns0ho",
+      "contactSource": true,
+      "topProject": true,
+      "image": "",
+      "github": "",
+      "demo": ""
+    },
+    {
+      "id": "proj-2",
+      "letter": "F",
+      "title": "Flames Game",
+      "subtitle": "Personal · 2025",
+      "description": "A fun interactive logic-based game built to demonstrate creative problem solving and algorithm design.",
+      "highlights": [
+        "Interactive terminal-style interface",
+        "Calculates relationship outcomes with FLAMES formula"
+      ],
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "contactSource": true,
+      "demo": "https://flames-lilac.vercel.app",
+      "topProject": true,
+      "download": "",
+      "image": "",
+      "github": ""
+    },
+    {
+      "id": "proj-3",
+      "letter": "P",
+      "title": "Personal Portfolio",
+      "subtitle": "Personal · 2026",
+      "description": "A modern, high-performance portfolio website built to showcase my professional journey.",
+      "highlights": [
+        "Built with Next.js and Tailwind CSS",
+        "Features smooth animations and dark mode"
+      ],
+      "tags": [
+        "Next.js",
+        "React",
+        "Tailwind CSS"
+      ],
+      "github": "https://github.com/Amarnath2007/Portfolio",
+      "demo": "https://amar-portfolio-26.vercel.app",
+      "topProject": true,
+      "download": "",
+      "contactSource": false,
+      "image": ""
+    },
+    {
+      "id": "proj-4",
+      "letter": "B",
+      "title": "Banking System",
+      "subtitle": "Personal · 2024",
+      "description": "A robust command-line banking application featuring secure user authentication.",
+      "highlights": [
+        "Balance management and transaction history",
+        "File-based data persistence"
+      ],
+      "tags": [
+        "C",
+        "File Handling",
+        "Algorithms"
+      ],
+      "github": "https://github.com/Amarnath2007/Bank_System-using-C.git",
+      "topProject": false,
+      "download": "",
+      "demo": "",
+      "contactSource": false,
+      "image": ""
+    },
+    {
+      "id": "proj-5",
+      "letter": "B",
+      "title": "Birthday Web Gift",
+      "subtitle": "Personal · 2026",
+      "description": "A personalized web-based gift crafted with AI tools, featuring a heartfelt user experience.",
+      "highlights": [
+        "Smooth animations and confetti effects",
+        "Combines creative vision with technical execution"
+      ],
+      "tags": [
+        "HTML",
+        "CSS",
+        "AI Tools"
+      ],
+      "github": "https://github.com/Amarnath2007/Template_birthday.git",
+      "demo": "https://template-birthday.vercel.app",
+      "topProject": false,
+      "download": "",
+      "contactSource": false,
+      "image": ""
+    },
+    {
+      "id": "proj-6",
+      "letter": "C",
+      "title": "Chatting System",
+      "subtitle": "Personal · 2024",
+      "description": "A real-time chat application allowing multiple users to connect, send and receive messages simultaneously.",
+      "highlights": [
+        "Built in C using TCP socket programming",
+        "Efficient communication handling over a network"
+      ],
+      "tags": [
+        "C",
+        "Networking",
+        "Real-time"
+      ],
+      "github": "https://github.com/Amarnath2007/Chat_System-using-C.git",
+      "topProject": false,
+      "download": "",
+      "demo": "",
+      "contactSource": false,
+      "image": ""
+    }
+  ],
+  "resume": {
+    "url": "https://drive.google.com/file/d/1HdmJToYiAvhOEhPjXkT0Uz9AqbuXZyqh/view?usp=drive_link",
+    "download_url": "https://drive.google.com/uc?export=download&id=1HdmJToYiAvhOEhPjXkT0Uz9AqbuXZyqh",
+    "preview_url": "https://drive.google.com/file/d/1HdmJToYiAvhOEhPjXkT0Uz9AqbuXZyqh/preview",
+    "updated_at": "2026-10-16T08:59:11.558Z"
+  }
+}

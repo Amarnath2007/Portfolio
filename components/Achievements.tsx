@@ -1,18 +1,32 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Trophy, Award, Star, Zap, ChevronLeft, ChevronRight, ArrowRight, X, ImageIcon, ZoomIn } from "lucide-react";
+import { Trophy, Award, Zap, ArrowRight, X, Medal, Sparkles, Star } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import SectionDivider from "./SectionDivider";
-import { supabase } from "@/lib/supabase";
+import { Achievement } from "@/lib/portfolio-data";
 
-const achievements = [
+const ICON_MAP: Record<string, any> = {
+  Trophy,
+  Award,
+  Zap,
+  Medal,
+  Sparkles,
+  Star,
+};
+
+function resolveAchievementIcon(icon: any) {
+  if (typeof icon === "string") {
+    return ICON_MAP[icon] || Trophy;
+  }
+  return icon || Trophy;
+}
+
+const defaultAchievements = [
   {
     icon: Trophy,
-    iconColor: "#60a5fa",
-    iconBg: "#0c1a40",
     title: "Inter-College Wins",
     highlight: "🏆 5+ Wins",
     subtitle: "Various Institutions",
@@ -22,8 +36,6 @@ const achievements = [
   },
   {
     icon: Award,
-    iconColor: "#f59e0b",
-    iconBg: "#1c1200",
     title: "College Wins",
     highlight: "🏆 5+ Wins",
     subtitle: "PSG CAS (Internal)",
@@ -33,134 +45,145 @@ const achievements = [
   },
   {
     icon: Zap,
-    iconColor: "#818cf8",
-    iconBg: "#1e1b4b",
     title: "Hackathon Prizes",
+    highlight: "",
     subtitle: "Innovation & Coding",
     category: "hackathon",
     description:
-      "Building functional prototypes and solving real-world problems under pressure. Secured multiple podium finishes.",
+      "Building functional prototypes and solving real-world problems under pressure.",
+  },
+  {
+    icon: Award,
+    title: "Event Participations",
+    highlight: "📜 Participations",
+    subtitle: "Inside & Outside College",
+    category: "participations",
+    description:
+      "Active participation across technical symposiums, workshops, coding contests, and conferences spanning multiple institutions.",
   },
 ];
 
-export default function Achievements() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [images, setImages] = useState<Record<string, string>>({});
+interface AchievementsProps {
+  data?: Achievement[];
+}
+
+export default function Achievements({ data }: AchievementsProps) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
-  useEffect(() => {
-    async function fetchImages() {
-      const categories = ["intercollege", "hackathon", "events"];
-      const newImages: Record<string, string> = {};
-
-      for (const cat of categories) {
-        try {
-          const { data, error } = await supabase.storage.from("achievements").list(cat);
-          if (error) continue;
-
-          if (data && data.length > 0) {
-            const { data: urlData } = supabase.storage
-              .from("achievements")
-              .getPublicUrl(`${cat}/${data[0].name}`);
-            newImages[cat] = urlData.publicUrl;
-          }
-        } catch (err) {
-          console.error(`Error fetching images for ${cat}:`, err);
-        }
-      }
-      setImages(newImages);
-    }
-    fetchImages();
-  }, []);
-
-  const scroll = (dir: "left" | "right") => {
-    if (containerRef.current) {
-      containerRef.current.scrollBy({ left: dir === "right" ? 340 : -340, behavior: "smooth" });
-    }
-  };
+  const items = data && data.length > 0 ? data : defaultAchievements;
 
   return (
-    <section id="achievements" className="relative z-10 py-24">
+    <section id="achievements" className="relative z-10 pt-16 md:pt-20 pb-0 scroll-mt-24 md:scroll-mt-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Container */}
-        <div className="relative mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            <p className="text-blue-400 text-sm font-semibold tracking-[0.3em] uppercase mb-3">
-              — MY JOURNEY —
-            </p>
-            <h2 className="text-4xl sm:text-5xl font-bold text-white">Achievements</h2>
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-center mb-10 md:mb-12"
+        >
+          <p className="text-[#C7A46A] text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase mb-2.5 font-heading">
+            — MY JOURNEY —
+          </p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#F4F0E8] font-heading tracking-tight">
+            Achievements
+          </h2>
+        </motion.div>
 
-          {/* View All Button Removed from here */}
-        </div>
+        {/* Balanced Cards Grid */}
+        <div className={`grid ${items.length <= 3 ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-6xl" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl"} gap-5 lg:gap-6 mx-auto`}>
+          {items.map((item: any, i: number) => {
+            const Icon = resolveAchievementIcon(item.icon);
+            // Badge highlight text
+            const rawBadge = item.highlight || item.position_award || "";
+            const badge = rawBadge.trim();
+            const subtitleText = item.subtitle || item.event_name;
+            const targetCategory = item.category || "intercollege";
 
-        {/* Centered Cards Grid */}
-        <div className="flex flex-col md:flex-row flex-wrap justify-center gap-6 md:gap-8 lg:gap-10 max-w-6xl mx-auto">
-          {achievements.map((item, i) => {
-            const Icon = item.icon;
             return (
               <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 30 }}
+                key={item.id || item.title || i}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="glass-card relative rounded-2xl md:rounded-3xl p-8 sm:p-10 w-[95%] sm:w-[350px] mx-auto md:mx-0 cursor-default flex flex-col group justify-between overflow-hidden border border-white/5"
+                className="bg-[#151517] relative rounded-2xl md:rounded-3xl p-5 sm:p-7 md:p-8 w-full cursor-default flex flex-col justify-between overflow-hidden border border-[#302D28] hover:border-[#C7A46A]/40 transition-all duration-300 shadow-xl"
               >
-                {/* Floating Badge */}
-                {item.highlight && (
-                  <div 
-                    className="absolute top-4 right-4 px-3 py-1.5 rounded-full text-[10px] font-bold tracking-wider uppercase flex items-center justify-center border"
-                    style={{ 
-                      backgroundColor: `${item.iconColor}15`,
-                      borderColor: `${item.iconColor}40`,
-                      color: item.iconColor,
-                      boxShadow: `0 0 15px ${item.iconColor}30`
-                    }}
-                  >
-                    {item.highlight}
-                  </div>
-                )}
-
-                <div className="pr-12 md:pr-0">
-                  <div className="flex items-center gap-5 mb-6">
-                    <div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg"
-                      style={{ backgroundColor: item.iconBg }}
-                    >
-                      <Icon size={24} style={{ color: item.iconColor }} />
+                <div className="flex flex-col flex-grow">
+                  {/* Top row: Icon + Highlight Badge */}
+                  <div className="flex items-start justify-between gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 bg-[#202023] border border-[#302D28] text-[#C7A46A] shadow-inner p-3">
+                      <Icon size={22} />
                     </div>
-                    <div>
-                      <h3 className="text-white font-bold text-lg sm:text-xl leading-tight pr-2">{item.title}</h3>
-                      <p className="text-sm font-semibold" style={{ color: item.iconColor }}>
-                        {item.subtitle}
+                    {badge && (
+                      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase border border-[#C7A46A]/30 bg-[#C7A46A]/10 text-[#C7A46A] shrink-0">
+                        {badge}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Title & Subtitle */}
+                  <div className="mb-3">
+                    <h3 className="text-[#F4F0E8] font-bold text-base sm:text-lg leading-snug font-heading">
+                      {item.title}
+                    </h3>
+                    {subtitleText && (
+                      <p className="text-xs sm:text-sm font-medium text-[#C7A46A] mt-0.5">
+                        {subtitleText}
                       </p>
-                    </div>
+                    )}
+                    {item.date && (
+                      <p className="text-[11px] text-[#A7A198]/80 mt-0.5">
+                        {item.date}
+                      </p>
+                    )}
                   </div>
 
-                  <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-8">{item.description}</p>
+                  {/* Optional Image Thumbnail */}
+                  {item.image && (
+                    <div
+                      className="relative h-36 w-full mb-4 rounded-xl overflow-hidden bg-[#202023] border border-[#302D28] cursor-pointer group/thumb"
+                      onClick={() => setSelectedImage(item.image)}
+                    >
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className="object-cover group-hover/thumb:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  )}
+
+                  {/* Description */}
+                  <p className="text-[#A7A198] text-xs sm:text-sm leading-relaxed mb-6 flex-grow">
+                    {item.description}
+                  </p>
                 </div>
 
-                <Link href={`/achievements/${item.category}`} className="w-full">
-                  <motion.button
-                    whileHover={{ 
-                      scale: 1.02, 
-                      backgroundColor: "rgba(59, 130, 246, 0.15)",
-                      borderColor: "#3b82f6"
-                    }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full flex items-center justify-center gap-2 py-4 rounded-xl border border-blue-500/20 bg-blue-500/5 text-blue-400 text-sm font-bold transition-all duration-300"
-                  >
-                    View Certificates
-                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                  </motion.button>
-                </Link>
+                {/* Button */}
+                <div className="w-full mt-auto pt-2 flex flex-col gap-2">
+                  {item.image ? (
+                    <button
+                      type="button"
+                      onClick={() => setSelectedImage(item.image)}
+                      className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-[#302D28] bg-[#202023] text-[#F4F0E8] hover:bg-[#C7A46A]/15 hover:border-[#C7A46A]/50 hover:text-[#C7A46A] text-xs sm:text-sm font-semibold transition-all duration-200"
+                    >
+                      View Photo / Proof
+                      <ArrowRight size={15} />
+                    </button>
+                  ) : (
+                    <Link href={`/achievements/${targetCategory}`} className="w-full block">
+                      <motion.button
+                        whileHover={{ scale: 1.01 }}
+                        whileTap={{ scale: 0.99 }}
+                        className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-[#302D28] bg-[#202023] text-[#F4F0E8] hover:bg-[#C7A46A]/15 hover:border-[#C7A46A]/50 hover:text-[#C7A46A] text-xs sm:text-sm font-semibold transition-all duration-200"
+                      >
+                        <span>View Certificates</span>
+                        <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+                      </motion.button>
+                    </Link>
+                  )}
+                </div>
               </motion.div>
             );
           })}
@@ -174,23 +197,24 @@ export default function Achievements() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8 bg-black/90 backdrop-blur-md"
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8 bg-[#0B0B0C]/90 backdrop-blur-md"
             onClick={() => setSelectedImage(null)}
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
+              initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
+              exit={{ scale: 0.95, opacity: 0 }}
               className="relative max-w-5xl w-full h-full max-h-[80vh]"
               onClick={(e) => e.stopPropagation()}
             >
               <button
-                className="absolute -top-12 right-0 text-white hover:text-blue-400 transition-colors"
+                className="absolute -top-12 right-0 text-[#A7A198] hover:text-[#C7A46A] transition-colors"
                 onClick={() => setSelectedImage(null)}
+                aria-label="Close image"
               >
                 <X size={32} />
               </button>
-              <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10">
+              <div className="relative w-full h-full rounded-2xl overflow-hidden border border-[#302D28] bg-[#151517]">
                 <Image
                   src={selectedImage}
                   alt="Achievement Full"

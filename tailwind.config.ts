@@ -8,39 +8,47 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: "380px",
+      },
       fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
+        sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+        heading: ["Manrope", "sans-serif"],
       },
       colors: {
-        navy: {
-          900: "#020818",
-          800: "#050d1f",
-          700: "#081428",
-          600: "#0a1a35",
+        obsidian: "#0B0B0C",
+        charcoal: "#151517",
+        graphite: "#202023",
+        ivory: "#F4F0E8",
+        warmGrey: "#A7A198",
+        gold: {
+          DEFAULT: "#C7A46A",
+          light: "#D8BC8A",
+          dark: "#A88349",
+          muted: "rgba(199, 164, 106, 0.12)",
         },
-        blue: {
-          glow: "#3b82f6",
-          neon: "#60a5fa",
-          accent: "#1d4ed8",
-        },
+        charcoalBorder: "#302D28",
+        deepBlack: "#191919",
       },
       animation: {
         "spin-slow": "spin 8s linear infinite",
-        "pulse-glow": "pulseGlow 2s ease-in-out infinite",
         float: "float 6s ease-in-out infinite",
+        "ticker-left": "ticker-left 140s linear infinite",
+        "ticker-right": "ticker-right 140s linear infinite",
       },
       keyframes: {
-        pulseGlow: {
-          "0%, 100%": { boxShadow: "0 0 20px #3b82f6, 0 0 60px #1d4ed8" },
-          "50%": { boxShadow: "0 0 40px #60a5fa, 0 0 100px #3b82f6" },
-        },
         float: {
           "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-20px)" },
+          "50%": { transform: "translateY(-12px)" },
         },
-      },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "ticker-left": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        "ticker-right": {
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0)" },
+        },
       },
     },
   },
